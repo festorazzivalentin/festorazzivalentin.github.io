@@ -1,0 +1,24 @@
+/* dar estilo a la etiquet padre <veritifaction-card> esta es la versión en shadowDOm */
+:host {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: indigo;
+}
+/* dar estilo con el componente con un atributo en específico, si tiene open */
+:host([open]){
+    background-color: green;
+}
+
+/* Si host tiene x clase o x atributo, modificar su contenido de dentro */
+:host(.class-one){
+    .container {
+        background-color: aqua;
+    }
+}
+
+.container {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
