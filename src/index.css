@@ -28,8 +28,41 @@
     --secondary-color: #D99726; 
     --terciary-color: #1E3A8A;
     --light-gray-color: #d9d9d994;
+    --dark-blue-color: #05060fff;
+
     --neutral-grey: #475569;
     --neutral-white: #EFF2F6;
+
+      /* ---- Beauty & Wellness (rosa) ---- */
+    --beauty-bg:      #fbe6ee;  /* fondo claro */
+    --beauty-bg2:     #f6d3e1;  /* fondo degradado */
+    --beauty-accent:  #d94f83;  /* acento principal */
+    --beauty-deep:    #9c2f5c;  /* texto / tono oscuro */
+
+    /* ---- PPE & Health / Safety (verde) ---- */
+    --ppe-bg:         #e2f0e3;  /* fondo claro */
+    --ppe-bg2:        #cde6cf;  /* fondo degradado */
+    --ppe-accent:     #2f8f52;  /* acento principal */
+    --ppe-deep:       #1e6337;  /* texto / tono oscuro */
+
+    /* ---- Home Accents (ámbar) ---- */
+    --home-bg:        #faead9;  /* fondo claro */
+    --home-bg2:       #f3d7b6;  /* fondo degradado */
+    --home-accent:    #c97f2d;  /* acento principal */
+    --home-deep:      #8f5717;  /* texto / tono oscuro */
+
+    /* ---- Accessories (índigo) ---- */
+    --acc-bg:         #e9e4f5;  /* fondo claro */
+    --acc-bg2:        #d8cdef;  /* fondo degradado */
+    --acc-accent:     #6b4fa0;  /* acento principal */
+    --acc-deep:       #432f6b;  /* texto / tono oscuro */
+
+    /* ---- Base / neutros ---- */
+    --paper:          #f4f2ee;  /* fondo general de la página */
+    --ink:            #221f2a;  /* texto principal */
+    --ink-soft:       #6b6674;  /* texto secundario */
+
+    scroll-behavior: smooth;
 }
 
 body {
@@ -54,7 +87,6 @@ body {
 
 /* Nav Section */
 .nav-section {
-    border-bottom: 1px dashed var(--primary-color);
     padding: 0.5rem;
 
     .nav-container {
@@ -145,6 +177,7 @@ body {
         align-items: center;
 
         img {
+            filter: blur(3px);
             width: 1000px;
         }
     }
@@ -168,4 +201,116 @@ body {
         }
     }
 
+}
+
+/* Categories section */
+.categories-bento {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 1rem;
+    padding: 2rem;
+
+    .beauty {
+        padding: 1rem;
+
+        border: 1px solid var(--beauty-accent);
+        border-radius: 1rem;
+        background: linear-gradient(
+            160deg,
+            var(--beauty-bg) 0%,
+            var(--beauty-bg2) 100%
+        );
+        color: var(--beauty-deep);
+    }
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .contact-form {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        padding: 3rem;
+        width: fit-content;
+
+        hgroup {
+            width: 200px;
+        }
+
+        form {
+            display: flex;
+            width: max-content;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            grid-column-start: 2;
+            grid-row: 1 / span 2;
+
+            .textarea-group {
+                
+            
+                label {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: .8rem;
+                    font-family: 'Inter';
+                    font-weight: 500;
+                }
+
+                textarea {
+                    width: 280px;
+                    height: 120px;
+                    padding: .7rem;
+                    margin-top: .4rem;
+
+                    border: 1px solid transparent;
+                    border-radius: .5rem;
+                    
+                    font-family: 'Inter';
+                    font-size: .8rem;
+                    color: var(--neutral-grey);
+
+                    background-color: #05060f0a;
+                    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+                    
+                    resize: none;
+
+                    &:hover, &:focus {
+                        outline: none;
+                        border-color: var(--primary-color);
+                    }
+                }
+
+            }
+            .submit-btn {
+                --size: .9rem;
+
+                width: fit-content;
+                padding: .5rem var(--size);
+                border: 1px solid color-mix(in srgb, var(--terciary-color) 40%, transparent);;
+                border-radius: .5rem;
+                color: color-mix(in srgb, var(--terciary-color) 40%, transparent);
+                cursor: pointer;
+                font-family: 'Inter';
+                font-size: .8rem;
+                font-weight: 600;
+                background: none;
+                transition:
+                    border-color .5s,
+                    color .5s,
+                    background-color .5s;
+
+                &:hover {
+                    border-color: var(--terciary-color);
+                    color: var(--terciary-color);
+                }
+            }
+        }
+    }
 }

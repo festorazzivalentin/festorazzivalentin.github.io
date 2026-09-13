@@ -1,6 +1,6 @@
 import styles from './LogoBlueYellow.css' with { type: 'css' };
 
-class LogoBlueYellow extends HTMLElement {
+export class LogoBlueYellow extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({ mode: 'open' });
@@ -19,4 +19,4 @@ class LogoBlueYellow extends HTMLElement {
     }
 };
 
-customElements.define('logo-blue-yellow', LogoBlueYellow)
+customElements.define('logo-blue-yellow', LogoBlueYellow);

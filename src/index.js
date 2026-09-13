@@ -5,3 +5,4 @@ import './components/ActionBtn/ActionBtn.js';
 import './components/LinkBtn/LinkBtn.js';
 import './components/LogoBlueYellow/LogoBlueYellow.js';
 import './components/FlagLogo/FlagLogo.js';
+import './components/InputLabel/InputLabel.js';
