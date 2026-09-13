@@ -1,0 +1,32 @@
+---
+const { value } = Astro.props
+---
+
+<style>
+.container {
+    padding: 1rem;
+
+    button {
+        padding: 0.7rem 1.8rem;
+        
+        font-family: 'Inter';
+        font-weight: 600;
+        font-size: 0.8rem;
+
+        border: none;
+        border-radius: 0.35rem;
+        color: var(--neutral-white);
+        background: linear-gradient(
+            120deg,
+            var(--primary-color) 0%,
+            var(--terciary-color) 100%
+        );
+        box-shadow: 0 6px 14px #1e3a8a4d;
+        cursor: pointer;
+    }
+}
+</style>
+
+<div class="container">
+    <button>{value}</button>
+</div>

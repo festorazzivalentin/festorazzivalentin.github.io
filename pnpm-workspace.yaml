@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+#limita descargar versiones muy nuevas.
+#viene activado x defecto
+minimumReleaseAgeExclude:
+  - astro@6.3.8

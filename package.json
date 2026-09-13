@@ -1,0 +1,30 @@
+{
+  "name": "blue-yellow-services",
+  "version": "1.0.0",
+  "description": "Blue and Yellow Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.4.1",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "astro": "^7.3.2",
+    "vite-plugin-supersvg": "^0.0.7"
+  },
+  "dependencies": {
+    "vanilla-tilt": "^1.8.1"
+  }
+}

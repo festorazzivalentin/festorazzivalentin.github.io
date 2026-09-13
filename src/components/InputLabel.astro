@@ -1,0 +1,48 @@
+---
+const { text, type, placeholder } = Astro.props;
+---
+
+<style>
+div {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+input {
+  max-width: 290px;
+  width: 280px;
+  height: 35px;
+  margin-top: .4rem;
+  background-color: #05060f0a;
+  border-radius: .5rem;
+  padding: 0 .7rem;
+  border: 1px solid transparent;
+  font-size: .9rem;
+  color: var(--neutral-grey);
+
+  transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+label {
+  display: block;
+  font-size: .8rem;
+  font-family: 'Inter';
+  font-weight: 500;
+}
+
+input:hover, input:focus, input-group:hover input {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+input-group:hover .label, input:focus {
+  color: #05060fc2;
+}
+</style>
+
+<div>
+    <label>{text}
+    <input type={type} placeholder={placeholder}>
+    </label>
+</div>

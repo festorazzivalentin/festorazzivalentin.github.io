@@ -1,0 +1,33 @@
+---
+const { value } = Astro.props;
+---
+
+<style>
+button {
+    padding-bottom: 0.4rem;
+
+    font-family: 'Inter';
+    font-size: 0.8rem;
+    font-weight: 340;
+    letter-spacing: 0.04rem;
+
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--primary-color);
+    
+    transition:
+        color 0.2s,
+        border-bottom 0.5s;
+
+    cursor: pointer;
+
+    &:hover {
+        color: var(--secondary-color);
+        border-bottom: 1px solid var(--secondary-color);
+    }
+}
+</style>
+
+<button>
+    {value}
+</button>

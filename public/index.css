@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    src: 
+        local('Inter'),
+        url('../assets/fonts/inter-vf.ttf') format('truetype'),
+        url('../assets/fonts/inter-vf.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair';
+    src: 
+        local('Playfair'),
+        url('../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf') format('truetype'),
+        url('../assets/fonts/PlayfairDisplay-VariableFont_wght.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair Italic';
+    src:
+        local('Playfair Italic'),
+        url('../assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    /* Global variables */
+    --primary-color: #0A192F;
+    --secondary-color: #D99726; 
+    --terciary-color: #1E3A8A;
+    --light-gray-color: #d9d9d994;
+    --dark-blue-color: #05060fff;
+
+    --neutral-grey: #475569;
+    --neutral-white: #EFF2F6;
+
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair';
+}
+
+p, span {
+    font-family: 'Inter';
+}
