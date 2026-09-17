@@ -1,0 +1,50 @@
+---
+import Verification from "@/components/Verification.astro";
+import ContactBtn from "@/components/ContactBtn.astro";
+---
+
+<style>
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        .verification-header {
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            place-items: center;
+        }
+    }
+    
+</style>
+
+<section>
+    <header class="verification-header">
+        <hgroup>
+            <h1>Puedes confiar en nosotros</h1>
+            <p>Somos una compañía registrada</p>
+        </hgroup>
+    </header>
+
+    <div class="cards">
+        <Verification title="Registrado en Florida" description="Desde 1990" />
+        <Verification />
+        <Verification />
+        <Verification />
+    </div>
+
+    <footer>
+        <ContactBtn value="Descargar datos" />
+    </footer>
+</section>

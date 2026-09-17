@@ -1,15 +1,18 @@
 ---
-const { value } = Astro.props;
+const { value, link } = Astro.props;
 ---
 
 <style>
-button {
+a {
+    display: inline-block;
     padding-bottom: 0.4rem;
 
     font-family: 'Inter';
     font-size: 0.8rem;
     font-weight: 340;
     letter-spacing: 0.04rem;
+    text-decoration: none;
+    color: inherit;
 
     background: transparent;
     border: none;
@@ -28,6 +31,6 @@ button {
 }
 </style>
 
-<button>
+<a href={link}>
     {value}
-</button>
+</a>

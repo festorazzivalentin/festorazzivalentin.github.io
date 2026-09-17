@@ -1,0 +1,29 @@
+---
+import LogoBlueYellow from "@/components/LogoBlueYellow.astro";
+import Socials from "@/components/Socials.astro";
+---
+
+<style>
+    .footer-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8rem 2rem 2rem;
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+</style>
+
+<footer class="footer-section">
+    <div>
+        <LogoBlueYellow />
+    </div>
+    <div>
+        <p>
+            &copy; Todos los derechos reservados
+        </p>
+    </div>
+    <div>
+        <Socials/>
+    </div>
+</footer>

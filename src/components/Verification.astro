@@ -1,29 +1,30 @@
 ---
-const title = 'Companía registrada';
-const description = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, non, aut ducimus molestiae amet maiores.';
+const { title, description } = Astro.props;
+
+const DEAFULT_TITLE = 'Companía registrada';
+const DEFAULT_VALUE = 'Lorem, ipsum dolor sit amet consectetur';
 ---
 
 <style>
-.container {
-    display: flex;
-    width: max-content;
-    max-width: 350px;
+.card {
+    display: block;
+    width: 280px;
     align-items: center;
     flex-wrap: wrap;
     padding: 1rem;
-    margin: .9rem;
 
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    
     background-color: var(--light-gray-color);
-    border: 1px solid var(--neutral-white);
     box-shadow: 12px 17px 51px #00000038;
     backdrop-filter: blur(6px);
-    border-radius: 1rem;
-    user-select: none;
 
+    user-select: none;
     transition: all 0.5s;
 
     &:hover {
-        border: 1px solid var(--secondary-color);
+        border-color: var(--secondary-color);
 
         svg { 
             transform: scale(1.6);
@@ -35,11 +36,12 @@ const description = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. C
         transform: scale(0.85) rotateZ(1.7deg);
     }
 
-    header {
+    .title {
+        pading: 0;
         display: flex;
-        gap: 0.5rem;
         align-items: center;
-        justify-content: center;
+        gap: .4rem;
+        margin-bottom: .2rem;
 
         svg {
             transition: all 0.5s;
@@ -63,14 +65,10 @@ const description = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. C
 }
 </style>
 
-<div class="container">
-    <header>
+<div class="card">
+    <header class="title">
         <svg><use href="/assets/icons/others.svg#verification-check"></use></svg>
-        <h2>{title}</h2>
+        <h2>{title ?? DEAFULT_TITLE}</h2>
     </header>
-    <p>{description}</p>
+    <p>{description ?? DEFAULT_VALUE}</p>
 </div>
-
-<script>
-
-</script>

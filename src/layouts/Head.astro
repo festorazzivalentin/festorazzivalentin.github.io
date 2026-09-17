@@ -1,0 +1,46 @@
+---
+import LogoBlueYellow from "@/components/LogoBlueYellow.astro";
+import LinkBtn from "@/components/LinkBtn.astro";
+import ContactBtn from "@/components/ContactBtn.astro";
+---
+
+<style>
+header {
+    padding: 0.5rem;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            min-width: max-content;
+        }
+
+        .links {
+            width: stretch;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            margin-right: 2rem;
+            gap: 3rem;
+        }
+    }
+}
+</style>
+
+<header class="">
+    <nav>
+        <header class="logo">
+            <LogoBlueYellow />
+        </header>
+        <div class="links">
+            <LinkBtn value="Nosotros" link="" />
+            <LinkBtn value="Contacto" />
+            <LinkBtn value="Intereses" />
+        </div>
+        <footer>
+            <ContactBtn value="Contáctanos" />
+        </footer>  
+    </nav>
+</header>

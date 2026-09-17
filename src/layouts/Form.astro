@@ -1,0 +1,131 @@
+---
+import InputLabel from "@/components/InputLabel.astro";
+import Socials from "@/components/Socials.astro";
+
+---
+
+<style>
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .contact-form {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 140px 1fr;
+        gap: 0rem 4rem;
+        padding: 1rem;
+        margin: 14rem 0;
+        place-content: center;
+
+        h1 {
+            position: relative;
+            top: 10px;
+            height: fit-content;
+            font-family: 'Inter';
+            font-weight: 800;
+            font-size: 3rem;
+        }
+
+        form {
+            display: flex;
+            width: max-content;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            grid-column-start: 2;
+            grid-row: 1 / span 2;
+
+            .message-container {
+                label {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: .8rem;
+                    font-family: 'Inter';
+                    font-weight: 500;
+                }
+
+                textarea {
+                    width: 280px;
+                    height: 120px;
+                    padding: .7rem;
+                    margin-top: .4rem;
+
+                    border: 1px solid transparent;
+                    border-radius: .5rem;
+                    
+                    font-family: 'Inter';
+                    font-size: .8rem;
+                    color: var(--neutral-grey);
+
+                    background-color: #05060f0a;
+                    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+                    
+                    resize: none;
+
+                    &:hover, &:focus {
+                        outline: none;
+                        border-color: var(--primary-color);
+                    }
+                }
+
+            }
+            .submit-btn {
+                --size: .9rem;
+
+                width: fit-content;
+                padding: .5rem var(--size);
+                border: 1px solid color-mix(in srgb, var(--terciary-color) 40%, transparent);;
+                border-radius: .5rem;
+                color: color-mix(in srgb, var(--terciary-color) 40%, transparent);
+                cursor: pointer;
+                font-family: 'Inter';
+                font-size: .8rem;
+                font-weight: 600;
+                background: none;
+                transition:
+                    border-color .5s,
+                    color .5s,
+                    background-color .5s;
+
+                &:hover {
+                    border-color: var(--terciary-color);
+                    color: var(--terciary-color);
+                }
+            }
+        }
+
+        .socials-card {
+            align-self: start;
+            justify-self: start;
+        }
+    }
+}
+
+
+</style>
+
+<section class="form-container">
+    <div class="contact-form">
+        <h1>Contacta con nosotros</h1>
+
+        <form action="">
+            <InputLabel text="Correo electrónico" type="email" placeholder="email@email.com" />
+
+            <div class="message-container">
+                <label for="message">Mensaje
+                <textarea name="message" id=""></textarea></label>
+            </div>
+
+            <input class="submit-btn" type="submit" value="Enviar">
+        </form>
+    
+        <div class="socials-card">
+            <Socials class="" />
+        </div>
+    </div>
+
+
+</section>

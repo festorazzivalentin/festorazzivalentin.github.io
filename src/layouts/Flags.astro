@@ -1,0 +1,54 @@
+---
+import FlagList from "@/components/FlagList.astro";
+---
+
+<style>
+    .flags-section {
+        margin-top: 2rem;   
+        position: relative;
+
+        .world {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                filter: blur(3px);
+                width: 60%;
+            }
+        }
+
+        .flags-container {
+            position: relative;
+            text-align: center;
+            bottom: 400px;
+
+            h1 {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 1rem;
+                font-weight: 900;
+            }
+
+            .flags {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    }
+</style>
+
+<section class="flags-section">
+    <div class="world">
+        <img src="/assets/worldLow.svg" alt="Mundo">
+    </div>
+
+    <article class="flags-container">
+        <h1>Países de interés</h1>
+        <div class="flags">
+            <FlagList/>
+        </div>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </article>
+</section>

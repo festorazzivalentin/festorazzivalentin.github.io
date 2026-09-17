@@ -1,0 +1,100 @@
+---
+
+---
+
+<style>
+.container {
+  width: max-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .2rem;
+  gap: 1rem;
+  border-radius: .4rem;
+  background-color: ;
+  border: 1px solid transparent;
+  transition: border .5s;
+
+}
+
+/* for all social containers*/
+.social-container {
+    --size: 2.8rem;
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: .3s;
+  cursor: pointer;
+
+
+}
+
+/* instagram*/
+.instagram:hover {
+  background-color: #d62976;
+  transition-duration: .3s;
+}
+
+/* linkdin*/
+.linkedin:hover {
+  background-color: #0072b1;
+  transition-duration: .3s;
+}
+/* Whatsapp*/
+.whatsapp:hover {
+  background-color: #128C7E;
+  transition-duration: .3s;
+}
+
+.social-container:active {
+  transform: scale(0.9);
+  transition-duration: .3s;
+}
+
+.social-svg {
+    --size: 1.4rem;
+
+    color: #fff;
+    width: var(--size);
+    height: var(--size);
+
+    path {
+        fill: rgb(255, 255, 255);
+    }    
+}
+
+.social-container:hover .social-svg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+</style>
+
+<div class="container">
+    <div class="social-container instagram">
+        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#instagram"></use></svg>
+    </div>
+    <div class="social-container linkedin">
+        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#linkedin"></use></svg>
+    </div>
+    <div class="social-container whatsapp">
+        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#whatsapp"></use></svg>
+    </div>
+</div>
