@@ -1,12 +1,4 @@
 ---
-import Tilt from '@/components/Tilt.astro';
-import Verification from '@/components/Verification.astro';
-import LogoBlueYellow from '@/components/LogoBlueYellow.astro';
-import LinkBtn from '@/components/LinkBtn.astro';
-import FlagList from '@/components/FlagList.astro';
-import ContactBtn from '@/components/ContactBtn.astro';
-import InputLabel from '@/components/InputLabel.astro';
-
 import Head from '@/layouts/Head.astro';
 import Presentation from '@/layouts/Presentation.astro';
 import '../index.css';
@@ -15,6 +7,7 @@ import Flags from '@/layouts/Flags.astro';
 import Categories from '@/layouts/Categories.astro';
 import Form from '@/layouts/Form.astro';
 import Footer from '@/layouts/Footer.astro';
+import Socios from '@/layouts/Socios.astro';
 
 const title = 'Blue and Yellow';
 const description = 'Compañia de exportación e importación'
@@ -26,18 +19,15 @@ const description = 'Compañia de exportación e importación'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name"description" content={description}>
     <title>{title}</title>
+    <link rel="icon" href="/assets/favicon.ico">
 <body>
     <Head />
     <Presentation />
-
     <Verifications />
-
-    <Flags />
-
     <Categories/>
-
+    <Socios/>
+    <!-- <Flags /> -->
     <Form />
-
     <Footer />
 </body>
 </html>

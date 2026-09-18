@@ -35,14 +35,21 @@
 body {
     color: var(--primary-color);
     margin: 0;
+    background-color: #FBF8F2;
+    /* background-color: #F8F3E9; */
 
     h1, h2, h3, h4 {
         margin: 0;
         font-family: 'Playfair';
+        font-weight: 900;
     }
 
     p, span, a {
         font-family: 'Inter';
         font-size: .8rem;
+    }
+
+    p, span {
+        margin: 0;
     }
 }

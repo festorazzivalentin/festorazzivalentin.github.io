@@ -8,6 +8,7 @@ import Category from "@/components/Category.astro";
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 15rem 0;
 
         hgroup {
             text-align: center;
@@ -18,6 +19,8 @@ import Category from "@/components/Category.astro";
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 3rem;
+        
+
         }
     }
 </style>
@@ -28,14 +31,30 @@ import Category from "@/components/Category.astro";
         <p>Estamos interesados en hacer negociaciones con los siguientes productos</p>
     </hgroup>
     <div class="categories">
-        <Category/>
-        <Category/>
-        <Category/>
-        <Category/>
-        <Category/>
-        <Category/>
-        <Category/>
-        <Category/>
-    </div>
+        <Category description="Cosméticos" variant="pink">
+            <svg class="icon" slot="svg"><use href="/assets/icons/beauty.svg#cosmetics"></use></svg>
+        </Category>
+                <Category description="Fragancias" variant="wallet">
+            <svg class="icon" slot="svg"><use href="/assets/icons/beauty.svg#perfume"></use></svg>
+        </Category>
+                <Category description="Accesorios" variant="education">
+            <svg class="icon" slot="svg"><use href="/assets/icons/accesories.svg#sunglasses"></use></svg>
+        </Category>
+                <Category description="Celebraciones" variant="seasonal-green">
+            <svg class="icon" slot="svg"><use href="/assets/icons/seasonal.svg#tree"></use></svg>
+        </Category>
+        <Category description="Cuidado Personal" variant="personal-care">
+            <svg class="icon" slot="svg"><use href="/assets/icons/beauty.svg#personal-care"></use></svg>
+        </Category>
+                <Category description="Libros" variant="books">
+            <svg class="icon" slot="svg"><use href="/assets/icons/book.svg#book"></use></svg>
+        </Category>
+        <Category description="Hogar" variant="home-accents">
+            <svg class="icon" slot="svg"><use href="/assets/icons/home.svg#lamp"></use></svg>
+        </Category>
+        <Category description="Bebés & Niños" variant="baby-kids">
+            <svg class="icon" slot="svg"><use href="/assets/icons/baby.svg#baby"></use></svg>
+        </Category>
 
+    </div>
 </section>

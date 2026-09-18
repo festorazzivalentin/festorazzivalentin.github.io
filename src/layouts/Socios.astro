@@ -1,0 +1,83 @@
+---
+import FlagList from "@/components/FlagList.astro";
+
+
+---
+
+<style>
+    .socios-section {
+        margin: 15rem 0;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 2.6rem;
+        font-weight: 900;
+    }
+
+    .container {
+        display: flex;
+        padding: 2rem;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        overflow: hidden;
+        
+        img {
+            width: 4rem;
+            height: auto;
+        }
+    }
+
+    .socio-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 8rem;
+        height: 3rem;
+
+        padding: .8rem;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+        border-radius: 1rem;
+    }
+
+    .flags {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>
+
+<section class="socios-section">
+    <h1 class="title">Socios</h1>
+    <article class="container">
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+        <div class="socio-wrapper">
+            <img src="/assets/socios/asd-market-week.png" alt="ASD Market Week">
+        </div>
+    </article>
+    <footer class="flags">
+        <FlagList/>
+        <p>Realizamos nuestro trabajo a lo largo estos países, en un ámbito global</p>
+    </footer>
+</section>
