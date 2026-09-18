@@ -41,7 +41,6 @@ body {
     h1, h2, h3, h4 {
         margin: 0;
         font-family: 'Playfair';
-        font-weight: 900;
     }
 
     p, span, a {
