@@ -20,6 +20,18 @@
         url('/assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Space Grotesk';
+    src:
+        local('Space Grotesk'),
+        url('/assets/fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     /* Global variables */
     --primary-color: #0A192F;
@@ -32,20 +44,21 @@
 
     scroll-behavior: smooth;
 }
+
+
+
 body {
     color: var(--primary-color);
     margin: 0;
     background-color: #FBF8F2;
     /* background-color: #F8F3E9; */
 
-    h1, h2, h3, h4 {
-        margin: 0;
-        font-family: 'Playfair';
+    h1, h2 {
+        font-family: 'Space Grotesk';
     }
 
     p, span, a {
         font-family: 'Inter';
-        font-size: .8rem;
     }
 
     p, span {

@@ -1,6 +1,5 @@
 ---
 import Verification from "@/components/Verification.astro";
-import ContactBtn from "@/components/ContactBtn.astro";
 ---
 
 <style>
@@ -26,10 +25,6 @@ import ContactBtn from "@/components/ContactBtn.astro";
             gap: 1.4rem;
             place-items: center;
         }
-
-        h1 {
-            font-weight: 900;
-        }
     }
     
 </style>
@@ -38,18 +33,12 @@ import ContactBtn from "@/components/ContactBtn.astro";
     <header class="verification-header">
         <hgroup>
             <h1>Puedes confiar en nosotros</h1>
-            <p>Somos una compañía registrada</p>
+            <p>Somos una compañía legalmente registrada</p>
         </hgroup>
     </header>
 
     <div class="cards">
         <Verification title="Registrados legalmente" description="Estamos matriculados legalmente en el Internal Revenue Service (IRS)" />
-        <Verification />
-        <Verification />
-        <Verification />
+        <Verification title="Employer Identification Number" description="Tax ID 12-3456789" />
     </div>
-
-    <footer>
-        <ContactBtn value="Descargar datos" />
-    </footer>
 </section>
