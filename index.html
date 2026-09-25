@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue &amp; Yellow Service | Logística Global</title>
+<meta name="description" content="Blue &amp; Yellow Service: logística global de importación, exportación y distribución multicategoría, con sede en Florida, Estados Unidos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Reset & base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; color-scheme: light; }
+  html[data-theme="dark"] { color-scheme: dark; }
+  body {
+    margin: 0;
+    font-family: 'Public Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  h1, h2, h3, p, figure { margin: 0; }
+  input, select, textarea { font-family: inherit; font-size: 1rem; color: inherit; }
+
+  /* ---------- Color tokens ---------- */
+  :root {
+    --bg: #FFFFFF;
+    --bg-alt: #F4F6F8;
+    --surface: #FFFFFF;
+    --surface-border: #E2E6EA;
+    --text-primary: #101820;
+    --text-secondary: #4A5560;
+    --navy-900: #0B2740;
+    --navy-800: #123152;
+    --blue-500: #2E6BB8;
+    --blue-600: #23568F;
+    --gold-500: #E3A730;
+    --gold-600: #C68C1E;
+    --gold-text: #8A6410;
+    --on-navy: #F4F7FA;
+    --on-navy-soft: #B7C6D6;
+    --focus-ring: #C68C1E;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Public Sans', sans-serif;
+    --container: 1180px;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+      --bg: #0E1620;
+      --bg-alt: #101B27;
+      --surface: #16212E;
+      --surface-border: #29394A;
+      --text-primary: #EDF2F6;
+      --text-secondary: #9FB1C2;
+      --blue-500: #6FA8E8;
+      --blue-600: #8CBEF2;
+      --gold-500: #F0BB4E;
+      --gold-600: #F6CE79;
+      --gold-text: #F0BB4E;
+      --focus-ring: #F0BB4E;
+    }
+    html:not([data-theme="light"]) { color-scheme: dark; }
+  }
+  html[data-theme="dark"] {
+    --bg: #0E1620;
+    --bg-alt: #101B27;
+    --surface: #16212E;
+    --surface-border: #29394A;
+    --text-primary: #EDF2F6;
+    --text-secondary: #9FB1C2;
+    --blue-500: #6FA8E8;
+    --blue-600: #8CBEF2;
+    --gold-500: #F0BB4E;
+    --gold-600: #F6CE79;
+    --gold-text: #F0BB4E;
+    --focus-ring: #F0BB4E;
+  }
+
+  /* ---------- Layout helpers ---------- */
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+  section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+  .section-head { max-width: 640px; margin-bottom: clamp(2rem, 5vw, 3rem); }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    letter-spacing: -0.01em;
+    margin-bottom: .75rem;
+  }
+  .section-head p { color: var(--text-secondary); font-size: 1.05rem; }
+  .bg-alt { background: var(--bg-alt); }
+
+  /* ---------- Accessibility ---------- */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .route-path, .route-node { animation: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: .85rem 1.6rem; border-radius: 7px;
+    font-weight: 600; font-size: .98rem;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+    border: 1.5px solid transparent;
+  }
+  .btn-primary { background: var(--gold-500); color: var(--navy-900); }
+  .btn-primary:hover { background: var(--gold-600); }
+  .btn-outline { border-color: currentColor; }
+  .hero .btn-outline { color: var(--on-navy); }
+  .hero .btn-outline:hover { background: rgba(244,247,250,0.1); }
+  .wholesale-form .btn-primary { width: 100%; margin-top: .5rem; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--navy-900);
+    color: var(--on-navy);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; padding-top: .9rem; padding-bottom: .9rem;
+  }
+  .brand { display: flex; align-items: center; gap: .65rem; flex-shrink: 0; }
+  .brand-mark rect.logo-navy { fill: var(--on-navy); }
+  .brand-mark rect.logo-gold { fill: var(--gold-500); }
+  .brand-name {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+    line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .main-nav { display: flex; gap: 1.9rem; }
+  .main-nav a { font-size: .95rem; color: var(--on-navy-soft); transition: color .15s ease; white-space: nowrap; }
+  .main-nav a:hover { color: var(--on-navy); }
+  .header-controls { display: flex; align-items: center; gap: .9rem; }
+  .lang-toggle { display: flex; align-items: center; gap: .35rem; font-size: .85rem; font-weight: 600; }
+  .lang-btn { padding: .3rem .45rem; color: var(--on-navy-soft); border-radius: 4px; }
+  .lang-btn[aria-current="true"] { color: var(--gold-500); }
+  .lang-divider { color: var(--on-navy-soft); opacity: .5; }
+  .theme-toggle, .menu-toggle {
+    width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; color: var(--on-navy-soft); transition: background-color .15s ease, color .15s ease;
+  }
+  .theme-toggle:hover, .menu-toggle:hover { background: rgba(244,247,250,0.08); color: var(--on-navy); }
+  .theme-toggle svg { width: 20px; height: 20px; }
+  .icon-moon { display: none; }
+  html[data-theme="dark"] .icon-sun { display: none; }
+  html[data-theme="dark"] .icon-moon { display: block; }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) .icon-sun { display: none; }
+    html:not([data-theme="light"]) .icon-moon { display: block; }
+  }
+  .menu-toggle { display: none; }
+  .menu-toggle svg { width: 22px; height: 22px; }
+  .icon-close { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-menu { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+  .mobile-nav { display: none; flex-direction: column; padding: .5rem clamp(1.25rem,4vw,2.5rem) 1.5rem; }
+  .mobile-nav a { padding: .75rem 0; border-top: 1px solid rgba(244,247,250,0.12); color: var(--on-navy-soft); }
+  .mobile-nav.open { display: flex; }
+
+  @media (max-width: 900px) {
+    .main-nav { display: none; }
+    .menu-toggle { display: flex; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { background: var(--navy-900); color: var(--on-navy); padding: clamp(3.5rem,8vw,6rem) 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem,5vw,4rem); align-items: center; }
+  .hero-copy h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.2rem, 4.6vw, 3.4rem); line-height: 1.08; letter-spacing: -0.015em;
+    max-width: 14ch;
+  }
+  .hero-sub { margin-top: 1.25rem; font-size: 1.1rem; color: var(--on-navy-soft); max-width: 46ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+  .hero-visual svg { width: 100%; height: auto; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; max-width: 320px; margin: 0 auto 1rem; }
+  }
+
+  /* route drawing animation */
+  .route-path {
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: draw 2.4s ease-out forwards;
+  }
+  .route-path.d2 { animation-delay: .25s; }
+  .route-path.d3 { animation-delay: .5s; }
+  .route-path.d4 { animation-delay: .75s; }
+  .route-node { opacity: 0; animation: fadein .6s ease-out forwards; }
+  .route-node.n2 { animation-delay: .5s; }
+  .route-node.n3 { animation-delay: .9s; }
+  .route-node.n4 { animation-delay: 1.3s; }
+  .route-node.n5 { animation-delay: 1.7s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fadein { to { opacity: 1; } }
+
+  /* ---------- Mission / Vision ---------- */
+  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--surface-border); border: 1px solid var(--surface-border); border-radius: 10px; overflow: hidden; }
+  .mv-panel { background: var(--surface); padding: clamp(2rem,4vw,2.75rem); border-left: 4px solid var(--blue-500); }
+  .mv-vision { border-left-color: var(--gold-500); }
+  .mv-panel h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: .9rem; }
+  .mv-panel p { color: var(--text-secondary); font-size: 1.05rem; }
+  @media (max-width: 760px) { .mv-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Services ---------- */
+  .service-row {
+    display: flex; gap: clamp(1.5rem,4vw,3rem); align-items: flex-start;
+    padding: clamp(1.75rem,3vw,2.25rem) 0; border-top: 1px solid var(--surface-border);
+  }
+  .service-list > .service-row:last-child { border-bottom: 1px solid var(--surface-border); }
+  .service-row:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+  .service-icon { flex: 0 0 auto; width: 52px; height: 52px; color: var(--blue-500); }
+  .service-row:nth-child(even) .service-icon { color: var(--gold-600); }
+  html[data-theme="dark"] .service-row:nth-child(even) .service-icon,
+  html:not([data-theme="light"]) .service-row:nth-child(even) .service-icon { color: var(--gold-500); }
+  .service-icon svg { width: 100%; height: 100%; }
+  .service-content h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; margin-bottom: .4rem; }
+  .service-content p { color: var(--text-secondary); max-width: 56ch; }
+  .service-row:nth-child(even) .service-content p { margin-left: auto; }
+  @media (max-width: 640px) {
+    .service-row, .service-row:nth-child(even) { flex-direction: column; text-align: left; gap: .9rem; }
+    .service-row:nth-child(even) .service-content p { margin-left: 0; }
+  }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem,5vw,4rem); align-items: start; }
+  .about-copy h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem,3vw,2.35rem); letter-spacing: -0.01em; margin-bottom: 1.1rem; }
+  .about-copy p { color: var(--text-secondary); font-size: 1.05rem; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .feature-item .feature-icon { width: 30px; height: 30px; color: var(--blue-500); margin-bottom: .85rem; }
+  html[data-theme="dark"] .feature-item .feature-icon,
+  html:not([data-theme="light"]) .feature-item .feature-icon { color: var(--gold-500); }
+  .feature-item h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; margin-bottom: .35rem; }
+  .feature-item p { color: var(--text-secondary); font-size: .95rem; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .about-features { grid-template-columns: 1fr; } }
+
+  /* ---------- Wholesale form ---------- */
+  .wholesale-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2.5rem,5vw,4rem); align-items: start; }
+  .wholesale-intro h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem,3vw,2.35rem); letter-spacing: -0.01em; margin-bottom: .9rem; }
+  .wholesale-intro p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem; }
+  .wholesale-points li { position: relative; padding-left: 1.4rem; margin-bottom: .75rem; color: var(--text-secondary); }
+  .wholesale-points li::before {
+    content: ""; position: absolute; left: 0; top: .55rem; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold-500);
+  }
+  .wholesale-form {
+    background: var(--surface); border: 1px solid var(--surface-border); border-radius: 12px;
+    padding: clamp(1.5rem,3vw,2.25rem);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .form-field { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.1rem; }
+  .form-field.full { grid-column: 1 / -1; }
+  .form-field label { font-size: .88rem; font-weight: 600; color: var(--text-primary); }
+  .form-field input, .form-field select, .form-field textarea {
+    background: var(--bg); border: 1.5px solid var(--surface-border); border-radius: 7px;
+    padding: .7rem .85rem; color: var(--text-primary);
+  }
+  .form-field textarea { resize: vertical; min-height: 92px; }
+  .form-confirmation {
+    margin-top: 1rem; padding: .85rem 1rem; border-radius: 8px;
+    background: var(--bg-alt); color: var(--text-secondary); font-size: .92rem; border-left: 3px solid var(--gold-500);
+  }
+  @media (max-width: 720px) { .wholesale-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .contact-item { border-top: 1px solid var(--surface-border); padding-top: 1.25rem; }
+  .contact-item .contact-icon { width: 26px; height: 26px; color: var(--blue-500); margin-bottom: .8rem; }
+  html[data-theme="dark"] .contact-item .contact-icon,
+  html:not([data-theme="light"]) .contact-item .contact-icon { color: var(--gold-500); }
+  .contact-item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: .4rem; }
+  .contact-item p, .contact-item a { color: var(--text-secondary); font-size: .98rem; }
+  .contact-item a:hover { color: var(--blue-600); }
+  @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+  /* ---------- Footer ---------- */
+  .site-footer { background: var(--navy-900); color: var(--on-navy-soft); padding: 3.5rem 0 1.75rem; }
+  .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(244,247,250,0.12); }
+  .footer-brand { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
+  .footer-brand .brand-name { color: var(--on-navy); }
+  .footer-col p.footer-heading { color: var(--on-navy); font-weight: 600; margin-bottom: .9rem; font-size: .95rem; }
+  .footer-col ul li { margin-bottom: .6rem; font-size: .92rem; }
+  .footer-col a:hover { color: var(--on-navy); }
+  .footer-bottom { padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; font-size: .85rem; }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="#inicio" class="brand">
+      <svg class="brand-mark" width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <rect class="logo-navy" x="4" y="4" width="23" height="23" rx="6"/>
+        <rect class="logo-gold" x="15" y="15" width="21" height="21" rx="6"/>
+      </svg>
+      <span class="brand-name">Blue &amp; Yellow<br>Service</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Principal">
+      <a href="#inicio" data-i18n="nav_home">Inicio</a>
+      <a href="#mision-vision" data-i18n="nav_mission">Misión y Visión</a>
+      <a href="#servicios" data-i18n="nav_services">Servicios</a>
+      <a href="#nosotros" data-i18n="nav_about">Nosotros</a>
+      <a href="#proveedores" data-i18n="nav_suppliers">Proveedores</a>
+      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+    </nav>
+
+    <div class="header-controls">
+      <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+        <button type="button" class="lang-btn" data-lang="es" aria-current="true">ES</button>
+        <span class="lang-divider" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambiar a modo oscuro">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Móvil">
+    <a href="#inicio" data-i18n="nav_home">Inicio</a>
+    <a href="#mision-vision" data-i18n="nav_mission">Misión y Visión</a>
+    <a href="#servicios" data-i18n="nav_services">Servicios</a>
+    <a href="#nosotros" data-i18n="nav_about">Nosotros</a>
+    <a href="#proveedores" data-i18n="nav_suppliers">Proveedores</a>
+    <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 data-i18n="hero_title">Logística global sin fronteras</h1>
+        <p class="hero-sub" data-i18n="hero_subtitle">Importación, exportación y distribución multicategoría con la eficiencia y confiabilidad que su negocio necesita para crecer en cualquier mercado.</p>
+        <div class="hero-actions">
+          <a href="#proveedores" class="btn btn-primary" data-i18n="hero_cta_supplier">Conviértase en proveedor</a>
+          <a href="#contacto" class="btn btn-outline" data-i18n="hero_cta_quote">Solicitar información</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 480 460">
+          <circle cx="240" cy="220" r="140" fill="none" stroke="rgba(244,247,250,0.22)" stroke-width="1.4"/>
+          <ellipse cx="240" cy="220" rx="140" ry="36" fill="none" stroke="rgba(244,247,250,0.16)" stroke-width="1.1"/>
+          <ellipse cx="240" cy="220" rx="52" ry="140" fill="none" stroke="rgba(244,247,250,0.16)" stroke-width="1.1"/>
+          <path class="route-path" d="M140,150 Q240,60 340,140" fill="none" stroke="var(--gold-500)" stroke-width="2" stroke-linecap="round"/>
+          <path class="route-path d2" d="M340,140 Q415,205 358,270" fill="none" stroke="var(--gold-500)" stroke-width="2" stroke-linecap="round"/>
+          <path class="route-path d3" d="M118,292 Q126,372 200,332" fill="none" stroke="var(--gold-500)" stroke-width="2" stroke-linecap="round"/>
+          <path class="route-path d4" d="M200,332 Q288,380 358,270" fill="none" stroke="var(--gold-500)" stroke-width="2" stroke-linecap="round"/>
+          <circle class="route-node n1" cx="140" cy="150" r="5" fill="var(--gold-500)"/>
+          <circle class="route-node n2" cx="340" cy="140" r="5" fill="var(--gold-500)"/>
+          <circle class="route-node n3" cx="358" cy="270" r="5" fill="var(--gold-500)"/>
+          <circle class="route-node n4" cx="118" cy="292" r="5" fill="var(--gold-500)"/>
+          <circle class="route-node n5" cx="200" cy="332" r="5" fill="var(--gold-500)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION / VISION -->
+  <section id="mision-vision">
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-panel mv-mission">
+          <h2 data-i18n="mission_label">Misión</h2>
+          <p data-i18n="mission_text">Conectar mercados alrededor del mundo mediante soluciones logísticas confiables y a la medida, garantizando que cada producto llegue a su destino con seguridad, puntualidad y el más alto estándar de servicio.</p>
+        </div>
+        <div class="mv-panel mv-vision">
+          <h2 data-i18n="vision_label">Visión</h2>
+          <p data-i18n="vision_text">Ser una empresa de referencia en importación, exportación y distribución multicategoría, reconocida por su integridad, capacidad de adaptación y compromiso con el crecimiento de cada cliente y socio comercial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="servicios" class="bg-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="services_title">Servicios</h2>
+        <p data-i18n="services_subtitle">Soluciones logísticas integrales, pensadas para acompañar su producto en cada etapa del camino.</p>
+      </div>
+      <div class="service-list">
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10"/><path d="M7.5 9.5 12 14l4.5-4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service1_title">Importación</h3>
+            <p data-i18n="service1_desc">Gestión integral de importaciones con manejo aduanero experto, documentación completa y cumplimiento normativo en cada envío.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14V4"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service2_title">Exportación</h3>
+            <p data-i18n="service2_desc">Soluciones de exportación hacia mercados internacionales, con seguimiento cercano en cada etapa del proceso.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.1"/><circle cx="4.2" cy="5" r="1.7"/><circle cx="19.8" cy="5" r="1.7"/><circle cx="4.2" cy="19" r="1.7"/><circle cx="19.8" cy="19" r="1.7"/><path d="M10.4 10.4 5.6 6.3"/><path d="M13.6 10.4 18.4 6.3"/><path d="M10.4 13.6 5.6 17.7"/><path d="M13.6 13.6 18.4 17.7"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service3_title">Distribución multicategoría</h3>
+            <p data-i18n="service3_desc">Distribución eficiente de productos de múltiples categorías, adaptada a las necesidades específicas de cada cliente e industria.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service4_title">Almacenamiento y fulfillment</h3>
+            <p data-i18n="service4_desc">Espacios de almacenamiento seguros y servicios de fulfillment que ordenan su cadena de suministro de principio a fin.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><ellipse cx="12" cy="12" rx="4" ry="8.5"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service5_title">Transporte internacional</h3>
+            <p data-i18n="service5_desc">Transporte marítimo, aéreo y terrestre coordinado a nivel global para que su carga llegue a tiempo.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V15"/><path d="M12 20V10"/><path d="M19 20V5"/></svg>
+          </div>
+          <div class="service-content">
+            <h3 data-i18n="service6_title">Consultoría en cadena de suministro</h3>
+            <p data-i18n="service6_desc">Asesoría estratégica para optimizar costos, tiempos y procesos logísticos en toda su operación.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="nosotros">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <h2 data-i18n="about_title">Sobre Blue &amp; Yellow Service</h2>
+        <p data-i18n="about_text">Blue &amp; Yellow Service es una empresa de logística global registrada en el estado de Florida, Estados Unidos, especializada en importación, exportación y distribución de productos multicategoría. Conectamos fabricantes, proveedores y distribuidores alrededor del mundo mediante soluciones logísticas flexibles y orientadas a resultados, con un equipo que combina experiencia internacional y un trato cercano en cada proyecto.</p>
+      </div>
+      <div class="about-features">
+        <div class="feature-item">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="6" opacity="0.6"/><circle cx="12" cy="12" r="10" opacity="0.3"/></svg>
+          <h3 data-i18n="feature1_title">Cobertura global</h3>
+          <p data-i18n="feature1_desc">Operaciones que conectan mercados en América, Europa, Asia y más.</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3 data-i18n="feature2_title">Cumplimiento garantizado</h3>
+          <p data-i18n="feature2_desc">Procesos alineados con la normativa aduanera e internacional vigente.</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.5 2.5-6 5.5-6s5.5 2.5 5.5 6"/><circle cx="17.5" cy="7" r="2.2"/><path d="M14.8 13.2c2.6.4 4.2 2.6 4.2 5.8"/></svg>
+          <h3 data-i18n="feature3_title">Atención personalizada</h3>
+          <p data-i18n="feature3_desc">Un equipo dedicado a entender las necesidades específicas de su negocio.</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/></svg>
+          <h3 data-i18n="feature4_title">Experiencia multicategoría</h3>
+          <p data-i18n="feature4_desc">Manejo de una amplia variedad de productos e industrias.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHOLESALE SUPPLIERS -->
+  <section id="proveedores" class="bg-alt">
+    <div class="container wholesale-grid">
+      <div class="wholesale-intro">
+        <h2 data-i18n="wholesale_title">¿Es usted un proveedor mayorista?</h2>
+        <p data-i18n="wholesale_subtitle">Únase a nuestra red de proveedores. Complete el formulario y nuestro equipo revisará su información.</p>
+        <ul class="wholesale-points">
+          <li data-i18n="wholesale_point1">Proceso de postulación simple y directo</li>
+          <li data-i18n="wholesale_point2">Trabajamos con múltiples categorías de producto</li>
+          <li data-i18n="wholesale_point3">Comunicación cercana durante toda la evaluación</li>
+        </ul>
+      </div>
+
+      <form class="wholesale-form" id="supplier-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="f-company" data-i18n="form_company">Nombre de la empresa</label>
+            <input id="f-company" name="company" type="text" autocomplete="organization" required>
+          </div>
+          <div class="form-field">
+            <label for="f-contact" data-i18n="form_contact">Persona de contacto</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="f-email" data-i18n="form_email">Correo electrónico</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="f-phone" data-i18n="form_phone">Teléfono</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="form-field">
+            <label for="f-country" data-i18n="form_country">País de origen</label>
+            <input id="f-country" name="country" type="text" autocomplete="country-name" required>
+          </div>
+          <div class="form-field">
+            <label for="f-category" data-i18n="form_category">Categoría de producto</label>
+            <select id="f-category" name="category" required>
+              <option value="" data-i18n="form_cat_placeholder">Seleccione una categoría</option>
+              <option value="electronica" data-i18n="form_cat1">Electrónica</option>
+              <option value="alimentos" data-i18n="form_cat2">Alimentos y bebidas</option>
+              <option value="textiles" data-i18n="form_cat3">Textiles y moda</option>
+              <option value="salud" data-i18n="form_cat4">Salud y belleza</option>
+              <option value="hogar" data-i18n="form_cat5">Hogar y decoración</option>
+              <option value="industrial" data-i18n="form_cat6">Industrial y manufactura</option>
+              <option value="otra" data-i18n="form_cat7">Otra</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="f-volume" data-i18n="form_volume">Volumen mensual estimado</label>
+            <select id="f-volume" name="volume">
+              <option value="" data-i18n="form_vol_placeholder">Seleccione un rango</option>
+              <option value="bajo" data-i18n="form_vol1">Bajo</option>
+              <option value="medio" data-i18n="form_vol2">Medio</option>
+              <option value="alto" data-i18n="form_vol3">Alto</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="f-message" data-i18n="form_message">Cuéntenos sobre sus productos</label>
+            <textarea id="f-message" name="message"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="form_submit">Enviar solicitud</button>
+        <p class="form-confirmation" id="form-confirmation" role="status" hidden data-i18n="form_confirmation">Se abrirá su cliente de correo con la información completada. También puede escribirnos directamente a info@blueandyellowservice.com.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="contact_title">Contacto</h2>
+        <p data-i18n="contact_subtitle">Estamos para ayudarle. Comuníquese con nosotros para más información sobre nuestros servicios.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5.5-8 12-8 12s-8-6.5-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <h3 data-i18n="contact_address_label">Ubicación</h3>
+          <p data-i18n="contact_address_value">Florida, Estados Unidos</p>
+        </div>
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="m4 7 8 6 8-6"/></svg>
+          <h3 data-i18n="contact_reach_label">Correo y teléfono</h3>
+          <p><a href="mailto:info@blueandyellowservice.com">info@blueandyellowservice.com</a></p>
+          <p><a href="tel:+13055550148">+1 (305) 555-0148</a></p>
+        </div>
+        <div class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          <h3 data-i18n="contact_hours_label">Horario de atención</h3>
+          <p data-i18n="contact_hours_value">Lunes a viernes, 9:00 a.m. a 6:00 p.m. (hora del este)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
+            <rect x="4" y="4" width="23" height="23" rx="6" fill="#F4F7FA"/>
+            <rect x="15" y="15" width="21" height="21" rx="6" fill="var(--gold-500)"/>
+          </svg>
+          <span class="brand-name">Blue &amp; Yellow Service</span>
+        </div>
+        <p data-i18n="footer_tagline">Logística global sin fronteras.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading" data-i18n="footer_links_title">Enlaces</p>
+        <ul>
+          <li><a href="#mision-vision" data-i18n="nav_mission">Misión y Visión</a></li>
+          <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
+          <li><a href="#nosotros" data-i18n="nav_about">Nosotros</a></li>
+          <li><a href="#proveedores" data-i18n="nav_suppliers">Proveedores</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading" data-i18n="footer_contact_title">Contacto</p>
+        <ul>
+          <li><a href="mailto:info@blueandyellowservice.com">info@blueandyellowservice.com</a></li>
+          <li><a href="tel:+13055550148">+1 (305) 555-0148</a></li>
+          <li data-i18n="contact_address_value">Florida, Estados Unidos</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_registered">Blue &amp; Yellow Service está registrada en el estado de Florida, Estados Unidos.</span>
+      <span>© 2026 Blue &amp; Yellow Service. <span data-i18n="footer_rights">Todos los derechos reservados.</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var translations = {
+    es: {
+      nav_home: "Inicio", nav_mission: "Misión y Visión", nav_services: "Servicios",
+      nav_about: "Nosotros", nav_suppliers: "Proveedores", nav_contact: "Contacto",
+      meta_title: "Blue & Yellow Service | Logística Global",
+      meta_desc: "Blue & Yellow Service: logística global de importación, exportación y distribución multicategoría, con sede en Florida, Estados Unidos.",
+      hero_title: "Logística global sin fronteras",
+      hero_subtitle: "Importación, exportación y distribución multicategoría con la eficiencia y confiabilidad que su negocio necesita para crecer en cualquier mercado.",
+      hero_cta_supplier: "Conviértase en proveedor",
+      hero_cta_quote: "Solicitar información",
+      mission_label: "Misión",
+      mission_text: "Conectar mercados alrededor del mundo mediante soluciones logísticas confiables y a la medida, garantizando que cada producto llegue a su destino con seguridad, puntualidad y el más alto estándar de servicio.",
+      vision_label: "Visión",
+      vision_text: "Ser una empresa de referencia en importación, exportación y distribución multicategoría, reconocida por su integridad, capacidad de adaptación y compromiso con el crecimiento de cada cliente y socio comercial.",
+      services_title: "Servicios",
+      services_subtitle: "Soluciones logísticas integrales, pensadas para acompañar su producto en cada etapa del camino.",
+      service1_title: "Importación",
+      service1_desc: "Gestión integral de importaciones con manejo aduanero experto, documentación completa y cumplimiento normativo en cada envío.",
+      service2_title: "Exportación",
+      service2_desc: "Soluciones de exportación hacia mercados internacionales, con seguimiento cercano en cada etapa del proceso.",
+      service3_title: "Distribución multicategoría",
+      service3_desc: "Distribución eficiente de productos de múltiples categorías, adaptada a las necesidades específicas de cada cliente e industria.",
+      service4_title: "Almacenamiento y fulfillment",
+      service4_desc: "Espacios de almacenamiento seguros y servicios de fulfillment que ordenan su cadena de suministro de principio a fin.",
+      service5_title: "Transporte internacional",
+      service5_desc: "Transporte marítimo, aéreo y terrestre coordinado a nivel global para que su carga llegue a tiempo.",
+      service6_title: "Consultoría en cadena de suministro",
+      service6_desc: "Asesoría estratégica para optimizar costos, tiempos y procesos logísticos en toda su operación.",
+      about_title: "Sobre Blue & Yellow Service",
+      about_text: "Blue & Yellow Service es una empresa de logística global registrada en el estado de Florida, Estados Unidos, especializada en importación, exportación y distribución de productos multicategoría. Conectamos fabricantes, proveedores y distribuidores alrededor del mundo mediante soluciones logísticas flexibles y orientadas a resultados, con un equipo que combina experiencia internacional y un trato cercano en cada proyecto.",
+      feature1_title: "Cobertura global",
+      feature1_desc: "Operaciones que conectan mercados en América, Europa, Asia y más.",
+      feature2_title: "Cumplimiento garantizado",
+      feature2_desc: "Procesos alineados con la normativa aduanera e internacional vigente.",
+      feature3_title: "Atención personalizada",
+      feature3_desc: "Un equipo dedicado a entender las necesidades específicas de su negocio.",
+      feature4_title: "Experiencia multicategoría",
+      feature4_desc: "Manejo de una amplia variedad de productos e industrias.",
+      wholesale_title: "¿Es usted un proveedor mayorista?",
+      wholesale_subtitle: "Únase a nuestra red de proveedores. Complete el formulario y nuestro equipo revisará su información.",
+      wholesale_point1: "Proceso de postulación simple y directo",
+      wholesale_point2: "Trabajamos con múltiples categorías de producto",
+      wholesale_point3: "Comunicación cercana durante toda la evaluación",
+      form_company: "Nombre de la empresa",
+      form_contact: "Persona de contacto",
+      form_email: "Correo electrónico",
+      form_phone: "Teléfono",
+      form_country: "País de origen",
+      form_category: "Categoría de producto",
+      form_cat_placeholder: "Seleccione una categoría",
+      form_cat1: "Electrónica", form_cat2: "Alimentos y bebidas", form_cat3: "Textiles y moda",
+      form_cat4: "Salud y belleza", form_cat5: "Hogar y decoración", form_cat6: "Industrial y manufactura", form_cat7: "Otra",
+      form_volume: "Volumen mensual estimado",
+      form_vol_placeholder: "Seleccione un rango",
+      form_vol1: "Bajo", form_vol2: "Medio", form_vol3: "Alto",
+      form_message: "Cuéntenos sobre sus productos",
+      form_submit: "Enviar solicitud",
+      form_confirmation: "Se abrirá su cliente de correo con la información completada. También puede escribirnos directamente a info@blueandyellowservice.com.",
+      contact_title: "Contacto",
+      contact_subtitle: "Estamos para ayudarle. Comuníquese con nosotros para más información sobre nuestros servicios.",
+      contact_address_label: "Ubicación",
+      contact_address_value: "Florida, Estados Unidos",
+      contact_reach_label: "Correo y teléfono",
+      contact_hours_label: "Horario de atención",
+      contact_hours_value: "Lunes a viernes, 9:00 a.m. a 6:00 p.m. (hora del este)",
+      footer_tagline: "Logística global sin fronteras.",
+      footer_links_title: "Enlaces",
+      footer_contact_title: "Contacto",
+      footer_registered: "Blue & Yellow Service está registrada en el estado de Florida, Estados Unidos.",
+      footer_rights: "Todos los derechos reservados."
+    },
+    en: {
+      nav_home: "Home", nav_mission: "Mission & Vision", nav_services: "Services",
+      nav_about: "About", nav_suppliers: "Suppliers", nav_contact: "Contact",
+      meta_title: "Blue & Yellow Service | Global Logistics",
+      meta_desc: "Blue & Yellow Service: global logistics for import, export, and multi-category distribution, based in Florida, United States.",
+      hero_title: "Global logistics without borders",
+      hero_subtitle: "Import, export, and multi-category distribution with the efficiency and reliability your business needs to grow in any market.",
+      hero_cta_supplier: "Become a supplier",
+      hero_cta_quote: "Request information",
+      mission_label: "Mission",
+      mission_text: "To connect markets around the world through reliable, tailored logistics solutions, ensuring every product reaches its destination safely, on time, and with the highest standard of service.",
+      vision_label: "Vision",
+      vision_text: "To be a leading company in import, export, and multi-category distribution, recognized for our integrity, adaptability, and commitment to the growth of every client and business partner.",
+      services_title: "Services",
+      services_subtitle: "Comprehensive logistics solutions, built to support your product at every step of the way.",
+      service1_title: "Import",
+      service1_desc: "End-to-end import management with expert customs handling, complete documentation, and regulatory compliance on every shipment.",
+      service2_title: "Export",
+      service2_desc: "Export solutions to international markets, with close support at every stage of the process.",
+      service3_title: "Multi-category distribution",
+      service3_desc: "Efficient distribution of products across multiple categories, tailored to the specific needs of each client and industry.",
+      service4_title: "Warehousing & fulfillment",
+      service4_desc: "Secure storage facilities and fulfillment services that keep your supply chain organized from start to finish.",
+      service5_title: "International freight",
+      service5_desc: "Ocean, air, and ground transportation coordinated globally so your cargo arrives on time.",
+      service6_title: "Supply chain consulting",
+      service6_desc: "Strategic guidance to optimize costs, timing, and logistics processes across your entire operation.",
+      about_title: "About Blue & Yellow Service",
+      about_text: "Blue & Yellow Service is a global logistics company registered in the state of Florida, United States, specializing in import, export, and multi-category product distribution. We connect manufacturers, suppliers, and distributors around the world through flexible, results-driven logistics solutions, with a team that combines international experience with close attention on every project.",
+      feature1_title: "Global coverage",
+      feature1_desc: "Operations connecting markets across the Americas, Europe, Asia, and beyond.",
+      feature2_title: "Guaranteed compliance",
+      feature2_desc: "Processes aligned with current customs and international regulations.",
+      feature3_title: "Personalized service",
+      feature3_desc: "A team dedicated to understanding your business's specific needs.",
+      feature4_title: "Multi-category expertise",
+      feature4_desc: "Experience handling a wide variety of products and industries.",
+      wholesale_title: "Are you a wholesale supplier?",
+      wholesale_subtitle: "Join our supplier network. Fill out the form and our team will review your information.",
+      wholesale_point1: "Simple, straightforward application process",
+      wholesale_point2: "We work across multiple product categories",
+      wholesale_point3: "Close communication throughout the review",
+      form_company: "Company name",
+      form_contact: "Contact person",
+      form_email: "Email address",
+      form_phone: "Phone number",
+      form_country: "Country of origin",
+      form_category: "Product category",
+      form_cat_placeholder: "Select a category",
+      form_cat1: "Electronics", form_cat2: "Food & beverage", form_cat3: "Textiles & apparel",
+      form_cat4: "Health & beauty", form_cat5: "Home & decor", form_cat6: "Industrial & manufacturing", form_cat7: "Other",
+      form_volume: "Estimated monthly volume",
+      form_vol_placeholder: "Select a range",
+      form_vol1: "Low", form_vol2: "Medium", form_vol3: "High",
+      form_message: "Tell us about your products",
+      form_submit: "Submit application",
+      form_confirmation: "Your email client will open with the information filled in. You can also reach us directly at info@blueandyellowservice.com.",
+      contact_title: "Contact",
+      contact_subtitle: "We're here to help. Reach out to us for more information about our services.",
+      contact_address_label: "Location",
+      contact_address_value: "Florida, United States",
+      contact_reach_label: "Email & phone",
+      contact_hours_label: "Business hours",
+      contact_hours_value: "Monday to Friday, 9:00 AM to 6:00 PM (Eastern Time)",
+      footer_tagline: "Global logistics without borders.",
+      footer_links_title: "Links",
+      footer_contact_title: "Contact",
+      footer_registered: "Blue & Yellow Service is registered in the state of Florida, United States.",
+      footer_rights: "All rights reserved."
+    }
+  };
+
+  var supplierLabels = {
+    es: { company: "Empresa", contact: "Persona de contacto", email: "Correo", phone: "Teléfono", country: "País", category: "Categoría", volume: "Volumen mensual", message: "Mensaje" },
+    en: { company: "Company", contact: "Contact person", email: "Email", phone: "Phone", country: "Country", category: "Category", volume: "Monthly volume", message: "Message" }
+  };
+
+  var root = document.documentElement;
+  var currentLang = "es";
+
+  function safeGet(key) {
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function safeSet(key, value) {
+    try { window.localStorage.setItem(key, value); } catch (e) {}
+  }
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    var dict = translations[lang];
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) { el.textContent = dict[key]; }
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.setAttribute("aria-current", btn.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+    root.lang = lang;
+    document.title = dict.meta_title;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) { metaDesc.setAttribute("content", dict.meta_desc); }
+    safeSet("bys-lang", lang);
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      applyLanguage(btn.getAttribute("data-lang"));
+    });
+  });
+
+  var storedLang = safeGet("bys-lang");
+  var initialLang = storedLang === "en" || storedLang === "es"
+    ? storedLang
+    : (navigator.language && navigator.language.toLowerCase().indexOf("en") === 0 ? "en" : "es");
+  applyLanguage(initialLang);
+
+  /* Theme */
+  var themeToggle = document.getElementById("theme-toggle");
+  function setTheme(theme) {
+    if (theme === "light" || theme === "dark") {
+      root.setAttribute("data-theme", theme);
+    } else {
+      root.removeAttribute("data-theme");
+    }
+    safeSet("bys-theme", theme);
+    var isDark = theme === "dark" || (theme !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    themeToggle.setAttribute("aria-label", isDark ? (currentLang === "es" ? "Cambiar a modo claro" : "Switch to light mode") : (currentLang === "es" ? "Cambiar a modo oscuro" : "Switch to dark mode"));
+  }
+  var storedTheme = safeGet("bys-theme");
+  setTheme(storedTheme || "system");
+  themeToggle.addEventListener("click", function () {
+    var isDark = root.getAttribute("data-theme") === "dark" ||
+      (!root.getAttribute("data-theme") && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setTheme(isDark ? "light" : "dark");
+  });
+
+  /* Mobile menu */
+  var menuToggle = document.getElementById("menu-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  menuToggle.addEventListener("click", function () {
+    var open = mobileNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  mobileNav.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      mobileNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  /* Supplier form -> mailto */
+  var form = document.getElementById("supplier-form");
+  var confirmation = document.getElementById("form-confirmation");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    var data = new FormData(form);
+    var labels = supplierLabels[currentLang];
+    var categorySelect = document.getElementById("f-category");
+    var volumeSelect = document.getElementById("f-volume");
+    var categoryText = categorySelect.options[categorySelect.selectedIndex] ? categorySelect.options[categorySelect.selectedIndex].text : "";
+    var volumeText = volumeSelect.options[volumeSelect.selectedIndex] ? volumeSelect.options[volumeSelect.selectedIndex].text : "";
+
+    var lines = [
+      labels.company + ": " + data.get("company"),
+      labels.contact + ": " + data.get("contact"),
+      labels.email + ": " + data.get("email"),
+      labels.phone + ": " + data.get("phone"),
+      labels.country + ": " + data.get("country"),
+      labels.category + ": " + categoryText,
+      labels.volume + ": " + volumeText,
+      "",
+      labels.message + ":",
+      data.get("message") || "-"
+    ];
+
+    var subjectPrefix = currentLang === "es" ? "Nueva solicitud de proveedor mayorista" : "New wholesale supplier application";
+    var subject = subjectPrefix + " – " + data.get("company");
+    var mailto = "mailto:info@blueandyellowservice.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
+
+    window.location.href = mailto;
+    confirmation.hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
