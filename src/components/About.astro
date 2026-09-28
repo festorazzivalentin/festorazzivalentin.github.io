@@ -1,0 +1,125 @@
+---
+import Icon from '@/components/Icon.astro';
+import FlagList from '@/components/FlagList.astro';
+import { FEATURE_ICONS } from '@/data/site';
+import type { Dictionary } from '@/i18n';
+
+interface Props {
+    t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section section--alt" id="about">
+    <div class="container about">
+        <div class="about__copy">
+            <h2 class="about__title">{t.about.title}</h2>
+            <p class="about__text">{t.about.text}</p>
+        </div>
+
+        <ul class="about__features">
+            {
+                t.about.features.map((feature, index) => (
+                    <li class="feature">
+                        <span class="feature__icon">
+                            <Icon name={FEATURE_ICONS[index % FEATURE_ICONS.length]} />
+                        </span>
+                        <h3 class="feature__title">{feature.title}</h3>
+                        <p class="feature__desc">{feature.desc}</p>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+
+    <div class="container regions">
+        <h3 class="regions__title">{t.about.regionsTitle}</h3>
+        <FlagList />
+        <p class="regions__note">{t.about.regionsNote}</p>
+    </div>
+</section>
+
+<style>
+    .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2.5rem, 5vw, 4rem);
+        align-items: start;
+    }
+
+    .about__title {
+        font-size: var(--step-3);
+        margin-block-end: 1.1rem;
+    }
+
+    .about__text {
+        color: var(--text-secondary);
+        font-size: var(--step-1);
+        text-wrap: pretty;
+    }
+
+    .about__features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .feature__icon {
+        display: grid;
+        place-items: center;
+        inline-size: 1.875rem;
+        block-size: 1.875rem;
+        margin-block-end: 0.85rem;
+        color: var(--accent-icon);
+        font-size: 1.875rem;
+    }
+
+    .feature__title {
+        font-size: var(--step-1);
+        font-weight: 600;
+        margin-block-end: 0.35rem;
+    }
+
+    .feature__desc {
+        color: var(--text-secondary);
+        font-size: var(--step--1);
+        text-wrap: pretty;
+    }
+
+    .regions {
+        display: grid;
+        justify-items: center;
+        gap: 1rem;
+        margin-block-start: clamp(2.5rem, 5vw, 4rem);
+        padding-block-start: clamp(2rem, 4vw, 3rem);
+        border-block-start: 1px solid var(--surface-border);
+        text-align: center;
+    }
+
+    .regions__title {
+        font-size: var(--step-1);
+        font-weight: 600;
+    }
+
+    .regions__note {
+        max-inline-size: 46ch;
+        color: var(--text-secondary);
+        font-size: var(--step--1);
+    }
+
+    @media (width < 47.5rem) {
+        .about {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (width < 30rem) {
+        .about__features {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

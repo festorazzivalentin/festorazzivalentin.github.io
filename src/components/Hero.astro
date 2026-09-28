@@ -1,0 +1,164 @@
+---
+import type { Dictionary } from '@/i18n';
+
+interface Props {
+    t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="hero" id="home">
+    <div class="container hero__grid">
+        <div class="hero__copy">
+            <h1 class="hero__title">{t.hero.title}</h1>
+            <p class="hero__subtitle">{t.hero.subtitle}</p>
+            <div class="hero__actions">
+                <a class="btn btn--primary" href="#suppliers">{t.hero.ctaSupplier}</a>
+                <a class="btn btn--ghost btn--on-navy" href="#contact">{t.hero.ctaQuote}</a>
+            </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+            <svg viewBox="0 0 480 460" focusable="false">
+                <circle cx="240" cy="220" r="140" class="hero__ring" />
+                <ellipse cx="240" cy="220" rx="140" ry="36" class="hero__ring" />
+                <ellipse cx="240" cy="220" rx="52" ry="140" class="hero__ring" />
+                <g class="hero__routes">
+                    <path class="route" d="M140,150 Q240,60 340,140" />
+                    <path class="route route--d2" d="M340,140 Q415,205 358,270" />
+                    <path class="route route--d3" d="M118,292 Q126,372 200,332" />
+                    <path class="route route--d4" d="M200,332 Q288,380 358,270" />
+                    <circle class="node" cx="140" cy="150" r="5" />
+                    <circle class="node node--n2" cx="340" cy="140" r="5" />
+                    <circle class="node node--n3" cx="358" cy="270" r="5" />
+                    <circle class="node node--n4" cx="118" cy="292" r="5" />
+                    <circle class="node node--n5" cx="200" cy="332" r="5" />
+                </g>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        padding-block: clamp(3.5rem, 8vw, 6rem);
+        background-color: var(--navy-900);
+        color: var(--on-navy);
+    }
+
+    .hero__grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: center;
+    }
+
+    .hero__title {
+        font-size: var(--step-4);
+        line-height: 1.08;
+        max-inline-size: 16ch;
+    }
+
+    .hero__subtitle {
+        max-inline-size: 46ch;
+        margin-block-start: 1.25rem;
+        font-size: var(--step-1);
+        color: var(--on-navy-soft);
+        text-wrap: pretty;
+    }
+
+    .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-block-start: 2rem;
+    }
+
+    .hero__visual svg {
+        inline-size: 100%;
+        block-size: auto;
+    }
+
+    .hero__ring {
+        fill: none;
+        stroke: var(--on-navy);
+        stroke-opacity: 0.2;
+        stroke-width: 1.2;
+    }
+
+    .route {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-dasharray: 420;
+        stroke-dashoffset: 420;
+        animation: draw 2.4s var(--ease) forwards;
+    }
+
+    .route--d2 {
+        animation-delay: 0.25s;
+    }
+    .route--d3 {
+        animation-delay: 0.5s;
+    }
+    .route--d4 {
+        animation-delay: 0.75s;
+    }
+
+    .node {
+        fill: var(--gold);
+        opacity: 0;
+        animation: fade-in 0.6s var(--ease) forwards;
+    }
+
+    .node--n2 {
+        animation-delay: 0.5s;
+    }
+    .node--n3 {
+        animation-delay: 0.9s;
+    }
+    .node--n4 {
+        animation-delay: 1.3s;
+    }
+    .node--n5 {
+        animation-delay: 1.7s;
+    }
+
+    @keyframes draw {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes fade-in {
+        to {
+            opacity: 1;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .route {
+            stroke-dashoffset: 0;
+            animation: none;
+        }
+
+        .node {
+            opacity: 1;
+            animation: none;
+        }
+    }
+
+    @media (width < 56.25rem) {
+        .hero__grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero__visual {
+            order: -1;
+            inline-size: min(100%, 20rem);
+            margin-inline: auto;
+        }
+    }
+</style>

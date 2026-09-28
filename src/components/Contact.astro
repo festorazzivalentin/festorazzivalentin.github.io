@@ -1,0 +1,106 @@
+---
+import Icon from '@/components/Icon.astro';
+import Socials from '@/components/Socials.astro';
+import { SITE } from '@/data/site';
+import type { Dictionary } from '@/i18n';
+
+interface Props {
+    t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="contact">
+    <div class="container">
+        <div class="section-head">
+            <h2>{t.contact.title}</h2>
+            <p>{t.contact.subtitle}</p>
+        </div>
+
+        <ul class="contact">
+            <li class="contact__item">
+                <span class="contact__icon"><Icon name="pin" /></span>
+                <h3 class="contact__label">{t.contact.addressLabel}</h3>
+                <p class="contact__value">{t.contact.addressValue}</p>
+            </li>
+            <li class="contact__item">
+                <span class="contact__icon"><Icon name="mail" /></span>
+                <h3 class="contact__label">{t.contact.reachLabel}</h3>
+                <p class="contact__value">
+                    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                </p>
+                <p class="contact__value">
+                    <a href={`tel:${SITE.phoneHref}`}>{SITE.phone}</a>
+                </p>
+            </li>
+            <li class="contact__item">
+                <span class="contact__icon"><Icon name="clock" /></span>
+                <h3 class="contact__label">{t.contact.hoursLabel}</h3>
+                <p class="contact__value">{t.contact.hoursValue}</p>
+            </li>
+        </ul>
+
+        <div class="contact__socials">
+            <Socials tone="light" />
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .contact__item {
+        padding-block-start: 1.25rem;
+        border-block-start: 1px solid var(--surface-border);
+    }
+
+    .contact__icon {
+        display: grid;
+        place-items: center;
+        inline-size: 1.625rem;
+        block-size: 1.625rem;
+        margin-block-end: 0.8rem;
+        color: var(--accent-icon);
+        font-size: 1.625rem;
+    }
+
+    .contact__label {
+        font-size: var(--step-0);
+        font-weight: 600;
+        margin-block-end: 0.4rem;
+    }
+
+    .contact__value {
+        color: var(--text-secondary);
+        font-size: 0.98rem;
+    }
+
+    .contact__value a {
+        transition: color var(--speed) var(--ease);
+    }
+
+    .contact__value a:hover {
+        color: var(--blue-strong);
+    }
+
+    .contact__socials {
+        display: flex;
+        justify-content: center;
+        margin-block-start: clamp(2rem, 4vw, 3rem);
+    }
+
+    @media (width < 47.5rem) {
+        .contact {
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+    }
+</style>

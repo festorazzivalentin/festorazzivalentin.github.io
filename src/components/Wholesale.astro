@@ -1,0 +1,223 @@
+---
+import { SITE } from '@/data/site';
+import type { Dictionary } from '@/i18n';
+
+interface Props {
+    t: Dictionary;
+}
+
+const { t } = Astro.props;
+const { wholesale } = t;
+---
+
+<section class="section section--alt" id="suppliers">
+    <div class="container supplier">
+        <div class="supplier__intro">
+            <h2 class="supplier__title">{wholesale.title}</h2>
+            <p class="supplier__subtitle">{wholesale.subtitle}</p>
+            <ul class="supplier__points">
+                {wholesale.points.map((point) => <li>{point}</li>)}
+            </ul>
+        </div>
+
+        <form
+            class="supplier-form"
+            data-supplier-form
+            data-recipient={SITE.email}
+            data-subject={wholesale.emailSubject}
+            data-labels={JSON.stringify(wholesale.emailLabels)}
+            novalidate
+        >
+            <div class="supplier-form__grid">
+                <div class="field">
+                    <label for="f-company">{wholesale.company}</label>
+                    <input id="f-company" name="company" type="text" autocomplete="organization" required />
+                </div>
+                <div class="field">
+                    <label for="f-contact">{wholesale.contact}</label>
+                    <input id="f-contact" name="contact" type="text" autocomplete="name" required />
+                </div>
+                <div class="field">
+                    <label for="f-email">{wholesale.email}</label>
+                    <input id="f-email" name="email" type="email" autocomplete="email" required />
+                </div>
+                <div class="field">
+                    <label for="f-phone">{wholesale.phone}</label>
+                    <input id="f-phone" name="phone" type="tel" autocomplete="tel" required />
+                </div>
+                <div class="field">
+                    <label for="f-country">{wholesale.country}</label>
+                    <input id="f-country" name="country" type="text" autocomplete="country-name" required />
+                </div>
+                <!-- <div class="field">
+                    <label for="f-category">{wholesale.category}</label>
+                    <select id="f-category" name="category" required>
+                        <option value="" selected disabled>{wholesale.categoryPlaceholder}</option>
+                        {wholesale.categories.map((category) => <option value={category}>{category}</option>)}
+                    </select>
+                </div>
+                <div class="field field--full">
+                    <label for="f-volume">{wholesale.volume}</label>
+                    <select id="f-volume" name="volume">
+                        <option value="" selected disabled>{wholesale.volumePlaceholder}</option>
+                        {wholesale.volumes.map((volume) => <option value={volume}>{volume}</option>)}
+                    </select>
+                </div> -->
+                <div class="field field--full">
+                    <label for="f-message">{wholesale.message}</label>
+                    <textarea class="f-message" id="f-message" name="message"></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn--primary supplier-form__submit" type="submit">
+                {wholesale.submit}
+            </button>
+            <p class="supplier-form__confirmation" data-supplier-confirmation role="status" hidden>
+                {wholesale.confirmation}
+            </p>
+        </form>
+    </div>
+</section>
+
+<style>
+    .supplier {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(2.5rem, 5vw, 4rem);
+        align-items: start;
+    }
+
+    .supplier__title {
+        font-size: var(--step-3);
+        margin-block-end: 0.9rem;
+    }
+
+    .supplier__subtitle {
+        color: var(--text-secondary);
+        font-size: var(--step-1);
+        text-wrap: pretty;
+    }
+
+    .supplier__points {
+        display: grid;
+        gap: 0.75rem;
+        margin-block-start: 1.5rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .supplier__points li {
+        position: relative;
+        padding-inline-start: 1.4rem;
+        color: var(--text-secondary);
+    }
+
+    .supplier__points li::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0.55rem;
+        inline-size: 7px;
+        block-size: 7px;
+        border-radius: 50%;
+        background-color: var(--gold);
+    }
+
+    .supplier-form {
+        padding: clamp(1.5rem, 3vw, 2.25rem);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-lg);
+        background-color: var(--surface);
+        box-shadow: var(--shadow-soft);
+    }
+
+    .supplier-form__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.1rem;
+        margin-block-end: 1.1rem;
+    }
+
+    .field--full {
+        grid-column: 1 / -1;
+    }
+
+    .supplier-form__submit {
+        inline-size: 100%;
+    }
+
+    .supplier-form__confirmation {
+        margin-block-start: 1rem;
+        padding: 0.85rem 1rem;
+        border-inline-start: 3px solid var(--gold);
+        border-radius: var(--radius-sm);
+        background-color: var(--bg-alt);
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+    }
+
+    .supplier-form__confirmation[hidden] {
+        display: none;
+    }
+
+    .f-message {
+        resize: none;
+    }
+
+    @media (width < 45rem) {
+        .supplier {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (width < 35rem) {
+        .supplier-form__grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    const form = document.querySelector<HTMLFormElement>('[data-supplier-form]');
+
+    if (form) {
+        const confirmation = form.querySelector<HTMLElement>('[data-supplier-confirmation]');
+        const labels: Record<string, string> = JSON.parse(form.dataset.labels ?? '{}');
+
+        const selectedText = (name: string) => {
+            const select = form.elements.namedItem(name) as HTMLSelectElement | null;
+            return select?.selectedOptions[0]?.textContent?.trim() ?? '';
+        };
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const data = new FormData(form);
+            const value = (key: string) => String(data.get(key) ?? '').trim() || '-';
+
+            const body = [
+                `${labels.company}: ${value('company')}`,
+                `${labels.contact}: ${value('contact')}`,
+                `${labels.email}: ${value('email')}`,
+                `${labels.phone}: ${value('phone')}`,
+                `${labels.country}: ${value('country')}`,
+                `${labels.category}: ${selectedText('category') || '-'}`,
+                `${labels.volume}: ${selectedText('volume') || '-'}`,
+                '',
+                `${labels.message}:`,
+                value('message'),
+            ].join('\n');
+
+            const subject = `${form.dataset.subject ?? ''} – ${value('company')}`;
+            const mailto = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailto;
+            if (confirmation) confirmation.hidden = false;
+        });
+    }
+</script>

@@ -1,100 +1,82 @@
 ---
+import { SOCIALS } from '@/data/site';
+import { withBase } from '@/i18n';
 
+interface Props {
+    /** `navy` for the dark header/footer, `light` for content sections. */
+    tone?: 'navy' | 'light';
+    class?: string;
+}
+
+const { tone = 'navy', class: className } = Astro.props;
 ---
 
+<ul class:list={['socials', className]} data-tone={tone}>
+    {
+        SOCIALS.map((social) => (
+            <li>
+                <a
+                    class="socials__link"
+                    href={social.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    title={social.label}
+                >
+                    <span class="visually-hidden">{social.label}</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <use href={withBase(`assets/icons/social.svg#${social.id}`)} />
+                    </svg>
+                </a>
+            </li>
+        ))
+    }
+</ul>
+
 <style>
-.container {
-  width: max-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .2rem;
-  gap: 1rem;
-  border-radius: .4rem;
-  background-color: ;
-  border: 1px solid transparent;
-  transition: border .5s;
+    .socials {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
 
-}
+    .socials__link {
+        --size: 2.5rem;
 
-/* for all social containers*/
-.social-container {
-    --size: 2.8rem;
+        display: grid;
+        place-items: center;
+        inline-size: var(--size);
+        block-size: var(--size);
+        border-radius: 50%;
+        background-color: var(--on-navy-hover);
+        color: var(--on-navy);
+        transition:
+            background-color var(--speed) var(--ease),
+            color var(--speed) var(--ease),
+            transform var(--speed) var(--ease);
+    }
 
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background-color: rgb(44, 44, 44);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition-duration: .3s;
-  cursor: pointer;
+    .socials[data-tone='light'] .socials__link {
+        background-color: var(--accent-soft);
+        color: var(--accent-icon);
+    }
 
+    .socials__link svg {
+        inline-size: 1.15rem;
+        block-size: 1.15rem;
+    }
 
-}
+    .socials__link:hover {
+        transform: translateY(-2px);
+        background-color: var(--gold);
+        color: var(--navy-900);
+    }
 
-/* instagram*/
-.instagram:hover {
-  background-color: #d62976;
-  transition-duration: .3s;
-}
+    .socials[data-tone='light'] .socials__link:hover {
+        background-color: var(--blue);
+        color: var(--on-navy);
+    }
 
-/* linkdin*/
-.linkedin:hover {
-  background-color: #0072b1;
-  transition-duration: .3s;
-}
-/* Whatsapp*/
-.whatsapp:hover {
-  background-color: #128C7E;
-  transition-duration: .3s;
-}
-
-.social-container:active {
-  transform: scale(0.9);
-  transition-duration: .3s;
-}
-
-.social-svg {
-    --size: 1.4rem;
-
-    color: #fff;
-    width: var(--size);
-    height: var(--size);
-
-    path {
-        fill: rgb(255, 255, 255);
-    }    
-}
-
-.social-container:hover .social-svg {
-  animation: slide-in-top 0.3s both;
-}
-
-@keyframes slide-in-top {
-  0% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+    .socials__link:active {
+        transform: scale(0.94);
+    }
 </style>
-
-<div class="container">
-    <div class="social-container instagram">
-        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#instagram"></use></svg>
-    </div>
-    <div class="social-container linkedin">
-        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#linkedin"></use></svg>
-    </div>
-    <div class="social-container whatsapp">
-        <svg class="social-svg"><use class="" href="/assets/icons/social.svg#whatsapp"></use></svg>
-    </div>
-</div>

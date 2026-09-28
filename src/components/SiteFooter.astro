@@ -1,0 +1,125 @@
+---
+import Logo from '@/components/Logo.astro';
+import Socials from '@/components/Socials.astro';
+import { SECTIONS, SITE } from '@/data/site';
+import type { Dictionary } from '@/i18n';
+
+interface Props {
+    t: Dictionary;
+}
+
+const { t } = Astro.props;
+const footerLinks = SECTIONS.filter((section) =>
+    ['mission', 'services', 'categories', 'about', 'suppliers'].includes(section.key),
+);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="site-footer__grid">
+            <div class="site-footer__brand">
+                <Logo />
+                <p class="site-footer__tagline">{t.footer.tagline}</p>
+                <Socials />
+            </div>
+
+            <nav class="site-footer__col" aria-label={t.footer.linksTitle}>
+                <h2 class="site-footer__heading">{t.footer.linksTitle}</h2>
+                <ul>
+                    {
+                        footerLinks.map((section) => (
+                            <li>
+                                <a href={`#${section.id}`}>{t.nav[section.key]}</a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
+
+            <div class="site-footer__col">
+                <h2 class="site-footer__heading">{t.footer.contactTitle}</h2>
+                <ul>
+                    <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+                    <li><a href={`tel:${SITE.phoneHref}`}>{SITE.phone}</a></li>
+                    <li>{t.contact.addressValue}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="site-footer__bottom">
+            <p>{t.footer.registered}</p>
+            <p>&copy; {year} {SITE.name}. {t.footer.rights}</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        padding-block: 3.5rem 1.75rem;
+        background-color: var(--navy-900);
+        color: var(--on-navy-soft);
+    }
+
+    .site-footer__grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr;
+        gap: 2.5rem;
+        padding-block-end: 2.5rem;
+        border-block-end: 1px solid var(--on-navy-line);
+    }
+
+    .site-footer__brand {
+        display: grid;
+        justify-items: start;
+        gap: 0.9rem;
+    }
+
+    .site-footer__brand :global(.logo) {
+        color: var(--on-navy);
+    }
+
+    .site-footer__tagline {
+        max-inline-size: 28ch;
+    }
+
+    .site-footer__heading {
+        margin-block-end: 0.9rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--on-navy);
+    }
+
+    .site-footer__col ul {
+        display: grid;
+        gap: 0.6rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.92rem;
+    }
+
+    .site-footer__col a {
+        transition: color var(--speed) var(--ease);
+    }
+
+    .site-footer__col a:hover {
+        color: var(--on-navy);
+    }
+
+    .site-footer__bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding-block-start: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    @media (width < 47.5rem) {
+        .site-footer__grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+</style>

@@ -1,26 +1,60 @@
 ---
+import { FLAGS } from '@/data/site';
+import { withBase } from '@/i18n';
 
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+const sprite = withBase('assets/icons/flags.svg');
 ---
 
+<ul class:list={['flags', className]}>
+    {
+        FLAGS.map((flag) => (
+            <li class="flags__item">
+                <svg
+                    viewBox="0 0 24 24"
+                    role="img"
+                    aria-label={flag.name}
+                    focusable="false"
+                >
+                    <use href={`${sprite}#${flag.id}`} />
+                </svg>
+                <span class="flags__name">{flag.name}</span>
+            </li>
+        ))
+    }
+</ul>
+
 <style>
-.container  {
-    width: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
+    .flags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem 1.75rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
-svg {
-    width: 80px;
-}
+    .flags__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+    }
+
+    .flags__item svg {
+        inline-size: 2.25rem;
+        block-size: 1.5rem;
+        border-radius: 2px;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .flags__name {
+        font-size: 0.85rem;
+    }
 </style>
-
-<div class="container">
-    <svg><use href="/assets/icons/flags.svg#argentina"></use></svg>
-    <svg><use href="/assets/icons/flags.svg#mexico"></use></svg>
-    <svg><use href="/assets/icons/flags.svg#venezuela"></use></svg>
-    <svg><use href="/assets/icons/flags.svg#usa"></use></svg>
-    <svg><use href="/assets/icons/flags.svg#canada"></use></svg>
-</div>
