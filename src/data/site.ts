@@ -1,7 +1,7 @@
 /** Locale independent site data. Shared by every language. */
 export const SITE = {
     name: 'Blue & Yellow Service',
-    email: 'blueandyellow@gmail.com',
+    email: 'blueandyellowservices@gmail.com',
     phone: '+1 (754) 246-3167',
     phoneHref: '+13055550148',
     location: 'Florida, United States',
