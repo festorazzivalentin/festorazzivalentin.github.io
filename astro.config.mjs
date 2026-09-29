@@ -3,7 +3,7 @@ import supersvgPlugin from 'vite-plugin-supersvg';
 
 //docs.astro.build
 export default defineConfig({
-    compressHTML: false, // comprime HTML
+    compressHTML: true, // minifica el HTML
     site: 'https://blueandyellow.net',
     vite: {
         plugins: [

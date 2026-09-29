@@ -14,6 +14,11 @@ const t = dictionaries[locale];
 
 const site = Astro.site ?? Astro.url;
 const urlFor = (code: Locale) => new URL(withBase(localePath(code)), site);
+
+const FONTS = [
+    { path: 'assets/fonts/inter-vf.ttf', type: 'font/ttf' },
+    { path: 'assets/fonts/SpaceGrotesk-VariableFont_wght.ttf', type: 'font/ttf' },
+];
 ---
 
 <!doctype html>
@@ -43,6 +48,15 @@ const urlFor = (code: Locale) => new URL(withBase(localePath(code)), site);
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1620" />
 
         <link rel="icon" href={withBase('assets/favicon.ico')} sizes="any" />
+
+        {
+            /* Descarga las fuentes en paralelo con el CSS. `crossorigin` es
+               obligatorio: sin él el navegador las baja dos veces.
+               Al pasar los .ttf a .woff2 hay que actualizar href y type aquí. */
+            FONTS.map((font) => (
+                <link rel="preload" as="font" href={withBase(font.path)} type={font.type} crossorigin />
+            ))
+        }
 
         <!-- Resolve the stored theme before first paint to avoid a flash. -->
         <script is:inline>
