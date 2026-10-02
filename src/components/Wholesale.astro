@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/data/site';
+import { SITE, FORM, isFormConfigured } from '@/data/site';
 import type { Dictionary } from '@/i18n';
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 
 const { t } = Astro.props;
 const { wholesale } = t;
+
+const endpoint = `https://formspree.io/f/${FORM.formspreeId}`;
 ---
 
 <section class="section section--alt" id="suppliers">
@@ -23,58 +25,152 @@ const { wholesale } = t;
         <form
             class="supplier-form"
             data-supplier-form
-            data-recipient={SITE.email}
-            data-subject={wholesale.emailSubject}
-            data-labels={JSON.stringify(wholesale.emailLabels)}
+            data-configured={String(isFormConfigured)}
+            data-sending={wholesale.sending}
+            action={endpoint}
+            method="POST"
             novalidate
         >
             <div class="supplier-form__grid">
                 <div class="field">
                     <label for="f-company">{wholesale.company}</label>
-                    <input id="f-company" name="company" type="text" autocomplete="organization" required />
+                    <input
+                        id="f-company"
+                        name="company"
+                        type="text"
+                        autocomplete="organization"
+                        maxlength="120"
+                        required
+                    />
                 </div>
                 <div class="field">
                     <label for="f-contact">{wholesale.contact}</label>
-                    <input id="f-contact" name="contact" type="text" autocomplete="name" required />
+                    <input
+                        id="f-contact"
+                        name="contact"
+                        type="text"
+                        autocomplete="name"
+                        maxlength="120"
+                        required
+                    />
                 </div>
                 <div class="field">
                     <label for="f-email">{wholesale.email}</label>
-                    <input id="f-email" name="email" type="email" autocomplete="email" required />
+                    <input
+                        id="f-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        maxlength="254"
+                        required
+                    />
                 </div>
                 <div class="field">
                     <label for="f-phone">{wholesale.phone}</label>
-                    <input id="f-phone" name="phone" type="tel" autocomplete="tel" required />
+                    <input
+                        id="f-phone"
+                        name="phone"
+                        type="tel"
+                        autocomplete="tel"
+                        maxlength="40"
+                        required
+                    />
                 </div>
                 <div class="field">
                     <label for="f-country">{wholesale.country}</label>
-                    <input id="f-country" name="country" type="text" autocomplete="country-name" required />
+                    <input
+                        id="f-country"
+                        name="country"
+                        type="text"
+                        autocomplete="country-name"
+                        maxlength="80"
+                        required
+                    />
                 </div>
                 <!-- <div class="field">
                     <label for="f-category">{wholesale.category}</label>
                     <select id="f-category" name="category" required>
                         <option value="" selected disabled>{wholesale.categoryPlaceholder}</option>
-                        {wholesale.categories.map((category) => <option value={category}>{category}</option>)}
+                        {wholesale.categories.map((category) => <option>{category}</option>)}
                     </select>
                 </div>
                 <div class="field field--full">
                     <label for="f-volume">{wholesale.volume}</label>
                     <select id="f-volume" name="volume">
                         <option value="" selected disabled>{wholesale.volumePlaceholder}</option>
-                        {wholesale.volumes.map((volume) => <option value={volume}>{volume}</option>)}
+                        {wholesale.volumes.map((volume) => <option>{volume}</option>)}
                     </select>
                 </div> -->
                 <div class="field field--full">
                     <label for="f-message">{wholesale.message}</label>
-                    <textarea class="f-message" id="f-message" name="message"></textarea>
+                    <textarea
+                        class="f-message"
+                        id="f-message"
+                        name="message"
+                        maxlength="2000"
+                    ></textarea>
                 </div>
             </div>
 
-            <button class="btn btn--primary supplier-form__submit" type="submit">
-                {wholesale.submit}
+            <!-- Honeypot: fuera de pantalla para las personas, tentador para los bots.
+                 Formspree descarta cualquier envío que llegue con este campo completo. -->
+            <div class="supplier-form__trap" aria-hidden="true">
+                <label for="f-website">Company website</label>
+                <input
+                    id="f-website"
+                    type="text"
+                    name="_gotcha"
+                    tabindex="-1"
+                    autocomplete="off"
+                />
+            </div>
+
+            <input type="hidden" name="_subject" value={wholesale.emailSubject} />
+
+            {
+                isFormConfigured && (
+                    <>
+                        <div
+                            class="cf-turnstile supplier-form__captcha"
+                            data-sitekey={FORM.turnstileSiteKey}
+                            data-theme="auto"
+                        />
+                        <script
+                            is:inline
+                            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                            async
+                            defer
+                        />
+                    </>
+                )
+            }
+
+            <button class="btn btn--primary supplier-form__submit" type="submit" data-supplier-submit>
+                <span data-supplier-submit-label>{wholesale.submit}</span>
             </button>
-            <p class="supplier-form__confirmation" data-supplier-confirmation role="status" hidden>
-                {wholesale.confirmation}
+
+            <p
+                class="supplier-form__status supplier-form__status--success"
+                data-supplier-success
+                role="status"
+                hidden
+            >
+                {wholesale.success}
             </p>
+            <p
+                class="supplier-form__status supplier-form__status--error"
+                data-supplier-error
+                role="alert"
+                hidden
+            >
+                {wholesale.error} <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            </p>
+
+            {
+                import.meta.env.DEV && !isFormConfigured && (
+                    <p class="supplier-form__notice">{wholesale.notConfigured}</p>
+                )
+            }
         </form>
     </div>
 </section>
@@ -142,22 +238,68 @@ const { wholesale } = t;
         grid-column: 1 / -1;
     }
 
+    /* Mismo patrón que `.visually-hidden`, pero local: saca el honeypot de
+       pantalla sin `display: none`, que muchos bots se saltan. */
+    .supplier-form__trap {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .supplier-form__captcha {
+        margin-block: 1.4rem;
+    }
+
     .supplier-form__submit {
         inline-size: 100%;
     }
 
-    .supplier-form__confirmation {
+    .supplier-form__submit:disabled {
+        opacity: 0.65;
+        cursor: progress;
+    }
+
+    .supplier-form__status {
         margin-block-start: 1rem;
         padding: 0.85rem 1rem;
-        border-inline-start: 3px solid var(--gold);
+        border-inline-start: 3px solid transparent;
         border-radius: var(--radius-sm);
-        background-color: var(--bg-alt);
-        color: var(--text-secondary);
         font-size: 0.92rem;
     }
 
-    .supplier-form__confirmation[hidden] {
+    .supplier-form__status[hidden] {
         display: none;
+    }
+
+    .supplier-form__status--success {
+        border-inline-start-color: var(--gold);
+        background-color: var(--bg-alt);
+        color: var(--text-secondary);
+    }
+
+    .supplier-form__status--error {
+        border-inline-start-color: var(--danger);
+        background-color: var(--danger-soft);
+        color: var(--text-primary);
+    }
+
+    .supplier-form__status--error a {
+        text-decoration: underline;
+    }
+
+    .supplier-form__notice {
+        margin-block-start: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: var(--radius-sm);
+        background-color: var(--accent-soft);
+        color: var(--text-secondary);
+        font-size: 0.92rem;
     }
 
     .f-message {
@@ -178,46 +320,101 @@ const { wholesale } = t;
 </style>
 
 <script>
+    type TurnstileApi = { reset: (widget?: string) => void };
+
     const form = document.querySelector<HTMLFormElement>('[data-supplier-form]');
 
     if (form) {
-        const confirmation = form.querySelector<HTMLElement>('[data-supplier-confirmation]');
-        const labels: Record<string, string> = JSON.parse(form.dataset.labels ?? '{}');
+        const successBox = form.querySelector<HTMLElement>('[data-supplier-success]');
+        const errorBox = form.querySelector<HTMLElement>('[data-supplier-error]');
+        const submitButton = form.querySelector<HTMLButtonElement>('[data-supplier-submit]');
+        const submitLabel = form.querySelector<HTMLElement>('[data-supplier-submit-label]');
+        const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
 
-        const selectedText = (name: string) => {
-            const select = form.elements.namedItem(name) as HTMLSelectElement | null;
-            return select?.selectedOptions[0]?.textContent?.trim() ?? '';
+        const endpoint = form.getAttribute('action') ?? '';
+        const configured = form.dataset.configured === 'true';
+        const idleLabel = submitLabel?.textContent?.trim() ?? '';
+        const sendingLabel = form.dataset.sending || idleLabel;
+        const mountedAt = Date.now();
+
+        /* Nadie rellena cinco campos obligatorios en menos de 3 segundos. */
+        const MIN_FILL_MS = 3000;
+
+        const turnstile = () => (window as unknown as { turnstile?: TurnstileApi }).turnstile;
+
+        const toggle = (element: HTMLElement | null, visible: boolean) => {
+            if (element) element.hidden = !visible;
         };
 
-        form.addEventListener('submit', (event) => {
+        const setBusy = (busy: boolean) => {
+            if (submitButton) submitButton.disabled = busy;
+            if (submitLabel) submitLabel.textContent = busy ? sendingLabel : idleLabel;
+            form.setAttribute('aria-busy', String(busy));
+        };
+
+        const turnstileToken = () =>
+            form.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]')?.value ?? '';
+
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
+            toggle(successBox, false);
+            toggle(errorBox, false);
 
             if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
             }
 
-            const data = new FormData(form);
-            const value = (key: string) => String(data.get(key) ?? '').trim() || '-';
+            /* Honeypot completo o envío instantáneo: es un bot. Le mostramos
+               éxito para que no pueda distinguir por qué lo descartamos, y
+               no enviamos nada. */
+            if ((honeypot?.value ?? '').trim() !== '' || Date.now() - mountedAt < MIN_FILL_MS) {
+                toggle(successBox, true);
+                return;
+            }
 
-            const body = [
-                `${labels.company}: ${value('company')}`,
-                `${labels.contact}: ${value('contact')}`,
-                `${labels.email}: ${value('email')}`,
-                `${labels.phone}: ${value('phone')}`,
-                `${labels.country}: ${value('country')}`,
-                `${labels.category}: ${selectedText('category') || '-'}`,
-                `${labels.volume}: ${selectedText('volume') || '-'}`,
-                '',
-                `${labels.message}:`,
-                value('message'),
-            ].join('\n');
+            if (!configured) {
+                console.error('[supplier-form] Falta completar FORM en src/data/site.ts');
+                toggle(errorBox, true);
+                return;
+            }
 
-            const subject = `${form.dataset.subject ?? ''} – ${value('company')}`;
-            const mailto = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            if (turnstileToken() === '') {
+                console.error('[supplier-form] Turnstile no devolvió token');
+                toggle(errorBox, true);
+                return;
+            }
 
-            window.location.href = mailto;
-            if (confirmation) confirmation.hidden = false;
+            setBusy(true);
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' },
+                });
+
+                const payload = await response.json().catch(() => null);
+                const accepted = response.ok && payload?.ok !== false;
+
+                if (!accepted) {
+                    console.error(
+                        '[supplier-form] Formspree rechazó el envío:',
+                        payload?.errors ?? response.status,
+                    );
+                    toggle(errorBox, true);
+                    return;
+                }
+
+                form.reset();
+                turnstile()?.reset();
+                toggle(successBox, true);
+            } catch (error) {
+                console.error('[supplier-form] Fallo de red:', error);
+                toggle(errorBox, true);
+            } finally {
+                setBusy(false);
+            }
         });
     }
 </script>

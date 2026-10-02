@@ -3,9 +3,32 @@ export const SITE = {
     name: 'Blue & Yellow Service',
     email: 'blueandyellowservices@gmail.com',
     phone: '+1 (754) 246-3167',
-    phoneHref: '+13055550148',
+    phoneHref: '+17542463167',
     location: 'Florida, United States',
 } as const;
+
+/**
+ * Envío del formulario de proveedores.
+ *
+ * Las dos claves son PÚBLICAS por diseño: viven en el HTML del sitio y así lo
+ * esperan Formspree y Cloudflare. No son secretos, pero hasta completarlas el
+ * formulario no envía nada.
+ *
+ * Alta (una sola vez):
+ *   1. Creá la cuenta en https://formspree.io y un formulario nuevo.
+ *   2. Copiá el ID del formulario (la parte final de https://formspree.io/f/XXXX)
+ *      y pegalo en `formspreeId`.
+ *   3. En Formspree → Settings → CAPTCHA, elegí Cloudflare Turnstile y pegá
+ *      ahí la SECRET key de Turnstile (esa sí es privada, nunca va en este archivo).
+ *   4. Creá el widget en https://dash.cloudflare.com → Turnstile con el dominio
+ *      blueandyellow.net y pegá la SITE key en `turnstileSiteKey`.
+ */
+export const FORM = {
+    formspreeId: '',
+    turnstileSiteKey: '',
+} as const;
+
+export const isFormConfigured = Boolean(FORM.formspreeId && FORM.turnstileSiteKey);
 
 /** Sections rendered in the header / mobile nav / footer, in order. */
 export const SECTIONS = [
@@ -43,7 +66,6 @@ export const SERVICE_ICONS = [
 export const FEATURE_ICONS = ['reach', 'shield', 'people', 'grid'] as const;
 
 export const FLAGS = [
-    { id: 'argentina', name: 'Argentina' },
     { id: 'mexico', name: 'Mexico' },
     { id: 'venezuela', name: 'Venezuela' },
     { id: 'usa', name: 'United States' },

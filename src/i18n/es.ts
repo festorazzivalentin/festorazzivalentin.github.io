@@ -2,7 +2,7 @@ export const es = {
     meta: {
         title: 'Blue & Yellow Service | Logística Global',
         description:
-            'Blue & Yellow Service: logística global de importación, exportación y distribución multicategoría, con sede en Florida, Estados Unidos.',
+            'Blue & Yellow Service: logística global de exportación y distribución multicategoría, con sede en Florida, Estados Unidos.',
     },
     a11y: {
         skipToContent: 'Saltar al contenido',
@@ -25,7 +25,7 @@ export const es = {
     hero: {
         title: 'Logística global sin fronteras',
         subtitle:
-            'Importación, exportación y distribución multicategoría con la eficiencia y confiabilidad que su negocio necesita para crecer en cualquier mercado.',
+            'Exportación y distribución multicategoría con la eficiencia y confiabilidad que su negocio necesita para crecer en cualquier mercado.',
         ctaSupplier: 'Conviértase en proveedor',
         ctaQuote: 'Solicitar información',
     },
@@ -36,17 +36,13 @@ export const es = {
             'Conectar mercados alrededor del mundo mediante soluciones logísticas confiables y a la medida, garantizando que cada producto llegue a su destino con seguridad, puntualidad y el más alto estándar de servicio.',
         visionLabel: 'Visión',
         visionText:
-            'Ser una empresa de referencia en importación, exportación y distribución multicategoría, reconocida por su integridad, capacidad de adaptación y compromiso con el crecimiento de cada cliente y socio comercial.',
+            'Ser una empresa de referencia en exportación y distribución multicategoría, reconocida por su integridad, capacidad de adaptación y compromiso con el crecimiento de cada cliente y socio comercial.',
     },
     services: {
         title: 'Servicios',
         subtitle:
             'Soluciones logísticas integrales, pensadas para acompañar su producto en cada etapa del camino.',
         items: [
-            {
-                title: 'Importación',
-                desc: 'Gestión integral de importaciones con manejo aduanero experto, documentación completa y cumplimiento normativo en cada envío.',
-            },
             {
                 title: 'Exportación',
                 desc: 'Soluciones de exportación hacia mercados internacionales, con seguimiento cercano en cada etapa del proceso.',
@@ -84,7 +80,7 @@ export const es = {
     },
     about: {
         title: 'Sobre Blue & Yellow Service',
-        text: 'Blue & Yellow Service es una empresa de logística global registrada en el estado de Florida, Estados Unidos, especializada en importación, exportación y distribución de productos multicategoría. Conectamos fabricantes, proveedores y distribuidores alrededor del mundo mediante soluciones logísticas flexibles y orientadas a resultados, con un equipo que combina experiencia internacional y un trato cercano en cada proyecto.',
+        text: 'Blue & Yellow Service es una empresa de logística global registrada en el estado de Florida, Estados Unidos, especializada en exportación y distribución de productos multicategoría. Conectamos fabricantes, proveedores y distribuidores alrededor del mundo mediante soluciones logísticas flexibles y orientadas a resultados, con un equipo que combina experiencia internacional y un trato cercano en cada proyecto.',
         features: [
             {
                 title: 'Cobertura global',
@@ -151,19 +147,12 @@ export const es = {
         volumes: ['Bajo', 'Medio', 'Alto'],
         message: 'Mensaje',
         submit: 'Enviar solicitud',
-        confirmation:
-            'Se abrirá su cliente de correo con la información completada. También puede escribirnos directamente a info@blueandyellowservice.com.',
+        sending: 'Enviando…',
+        success:
+            '¡Gracias! Su solicitud fue enviada. Nuestro equipo la revisará y le responderá a la brevedad.',
+        error: 'No pudimos enviar su solicitud. Intente nuevamente. Si el problema persiste, escríbanos directamente a',
+        notConfigured: 'El formulario todavía no está configurado.',
         emailSubject: 'Nueva solicitud de proveedor mayorista',
-        emailLabels: {
-            company: 'Empresa',
-            contact: 'Persona de contacto',
-            email: 'Correo',
-            phone: 'Teléfono',
-            country: 'País',
-            category: 'Categoría',
-            volume: 'Volumen mensual',
-            message: 'Mensaje',
-        },
     },
     contact: {
         title: 'Contacto',

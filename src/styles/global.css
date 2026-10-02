@@ -126,6 +126,10 @@
         --gold-text: light-dark(#8a6410, #f0bb4e);
         --focus-ring: light-dark(#c68c1e, #f0bb4e);
 
+        /* Errors y avisos (formularios) */
+        --danger: light-dark(#b3261e, #f2b8b5);
+        --danger-soft: light-dark(#fdecea, #2b1a19);
+
         /* Accent that flips to gold on dark surfaces (keeps contrast) */
         --accent-icon: light-dark(var(--blue), var(--gold));
         --accent-soft: light-dark(

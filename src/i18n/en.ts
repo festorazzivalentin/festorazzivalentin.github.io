@@ -156,19 +156,13 @@ export const en: Dictionary = {
         volumes: ['Low', 'Medium', 'High'],
         message: 'Tell us about your products',
         submit: 'Submit application',
-        confirmation:
-            'Your email client will open with the information filled in. You can also reach us directly at info@blueandyellowservice.com.',
+        sending: 'Sending…',
+        success:
+            'Thank you! Your application was sent. Our team will review it and get back to you shortly.',
+        error:
+            'We could not send your application. Please try again. If the problem persists, email us directly at',
+        notConfigured: 'The form is not configured yet.',
         emailSubject: 'New wholesale supplier application',
-        emailLabels: {
-            company: 'Company',
-            contact: 'Contact person',
-            email: 'Email',
-            phone: 'Phone',
-            country: 'Country',
-            category: 'Category',
-            volume: 'Monthly volume',
-            message: 'Message',
-        },
     },
     contact: {
         title: 'Contact',

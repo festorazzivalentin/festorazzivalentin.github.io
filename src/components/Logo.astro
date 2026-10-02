@@ -10,11 +10,12 @@ const { stacked = false, class: className } = Astro.props;
 ---
 
 <span class:list={['logo', className]}>
-    <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+    <img class="logo logo__mark" src="/assets/logo.jpeg" alt="">
+    <!-- <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
         <rect class="logo__square" x="4" y="4" width="23" height="23" rx="6"></rect>
         <rect class="logo__square logo__square--gold" x="15" y="15" width="21" height="21" rx="6"
         ></rect>
-    </svg>
+    </svg> -->
     <span class="logo__name">
         {stacked ? <><span>Blue &amp; Yellow</span><br /><span>Service</span></> : SITE.name}
     </span>
@@ -26,6 +27,7 @@ const { stacked = false, class: className } = Astro.props;
         align-items: center;
         gap: 0.65rem;
         color: inherit;
+        border-radius: 50%;
     }
 
     .logo__mark {
